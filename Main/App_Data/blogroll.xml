@@ -1,0 +1,9 @@
+<opml xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+  <body>
+    <outline xfn="contact" title="Mads Kristensen" description="Full featured simplicity in ASP.NET and C#" xmlUrl="http://feeds.feedburner.com/netslave" htmlUrl="http://www.madskristensen.dk" />
+    <outline title="Al Nyveldt" description="Adventures in Code and Other Stories " xfn="contact" xmlUrl="http://feeds.feedburner.com/razorant" htmlUrl="http://www.nyveldt.com/blog/" />
+    <outline title="Ruslan Tur" description=".NET and Open Source: better together" xfn="contact" xmlUrl="http://feeds.feedburner.com/rtur" htmlUrl="http://rtur.net/blog/" />
+    <outline title="Roman Clarkson" description="We are 1.net" xfn="contact" xmlUrl="http://feeds.feedburner.com/romanc" htmlUrl="http://www.romanclarkson.us/" />
+    <outline title="John Dyer" description="Technology and web development in ASP.NET, Flash, and JavaScript" xfn="contact" xmlUrl="http://johndyer.name/syndication.axd" htmlUrl="http://johndyer.name/" />
+  </body>
+</opml>

@@ -1,0 +1,4 @@
+<Modules>
+  <Module PersistentId="B02E9840-1261-47AB-AE40-D333E73BB2C0" ModuleId="BlogEngine" />
+  <Module PersistentId="9ED9914A-FB6E-4D21-8C71-9122E8C3076B" ModuleId="BlogEngine.Core" />
+</Modules>

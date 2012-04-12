@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ViewStateExperiment", "..\ViewStateExperiment", "{4DF570D9-AC85-4E2C-AF86-43156C6BB71F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		Debug.AspNetCompiler.VirtualPath = "/ViewStateExperiment"
+		Debug.AspNetCompiler.PhysicalPath = "..\ViewStateExperiment\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ViewStateExperiment\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ViewStateExperiment"
+		Release.AspNetCompiler.PhysicalPath = "..\ViewStateExperiment\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ViewStateExperiment\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2043"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DF570D9-AC85-4E2C-AF86-43156C6BB71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF570D9-AC85-4E2C-AF86-43156C6BB71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

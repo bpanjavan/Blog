@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>Silverlight 3 Unit Testing - The Setup</title>
+  <description>Silverlight 3 Unit Testing Setup</description>
+  <content>&lt;strong&gt;What is the Silverlight Unit Testing Framework?&lt;/strong&gt;&amp;nbsp; 
+&lt;p&gt;
+&lt;a href="http://www.jeff.wilcox.name/"&gt;Jeff Wilcox&lt;/a&gt; of the Microsoft Silverlight team developed the &lt;strong&gt;Silverlight Unit Testing Framework&lt;/strong&gt; in his spare time. Fundamentally the only difference I notice so far is that there is no integration with Visual Studio.&amp;nbsp; This leads to a lack of other Unit Testing features of MS Test, including Data-Driven Unit Testing, and Code Coverage analysis.&amp;nbsp; But at the core, you shouldn&amp;#39;t have any trouble creating sufficient Unit Tests on a Silverlight class library. 
+&lt;/p&gt;
+&lt;p&gt;
+&lt;strong&gt;The Setup&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+I&amp;#39;m doing this in Visual Studio 2008 SP1 with Silverlight 3.&amp;nbsp; You need: 
+&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Silverlight 3 Tools for Visual Studio 2008 SP1&lt;/li&gt;
+	&lt;li&gt;Silverlight 3 SDK (optional?)&lt;/li&gt;
+	&lt;li&gt;Silverlight 3 Toolkit July 2009&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+&lt;strong&gt;Execution&amp;nbsp;&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+You&amp;#39;ll know the Silverlight 3 Tools have been properly installed if you can create a Silverlight application or Silverlight class library.&amp;nbsp; I&amp;#39;m creating&amp;nbsp;a Silverlight class library:&amp;nbsp; 
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="border: 1px solid black" src="/pics/silverlight3unittesting/CreateSilverlightProject.jpg" alt="Create Project" title="Create Project" width="611" height="430" /&gt; 
+&lt;/div&gt;
+&lt;p&gt;
+Create the &amp;quot;Test Project&amp;quot; by adding a Silverlight Application to this solution.&amp;nbsp; At this point if you run the app or click to view the page &amp;quot;Silverlight_GameBoardTestsTestPage.html&amp;quot; you will see nothing.&amp;nbsp; To make this into a test app you need to import the proper assemblies.&amp;nbsp; These can be found in a zip file that came in the SDK directory of the Silverlight 3 toolkit.&amp;nbsp; The path should look something like this: &amp;quot;C:\Program Files\Microsoft SDKs\Silverlight\v3.0\Toolkit\Jul09\Source\Source Code.zip&amp;quot; 
+&lt;/p&gt;
+&lt;p&gt;
+Extract the contents of this zip file where you wish.&amp;nbsp; Once extracted, the assemblies are located in the &amp;quot;Binaries&amp;quot; folder.&amp;nbsp; I&amp;#39;m going to add the necessary assemblies to the &amp;quot;GameBoard_Tests&amp;quot; project.&amp;nbsp; 
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="border: 1px solid black" src="/pics/silverlight3unittesting/AddAssemblyReferences.jpg" alt="Add References" title="Add References" width="640" height="456" /&gt;&amp;nbsp; 
+&lt;/div&gt;
+&lt;p&gt;
+You should now see the two new references in your test project. Now I&amp;#39;m going to add my test class, specifically called &amp;quot;GameBoardTests&amp;quot;.&amp;nbsp; In this class, I&amp;#39;m going to import the UnitTesting namespace and label my class with the &amp;quot;TestMethod&amp;quot; attribute. For starter&amp;#39;s, we&amp;#39;ll add a test that always passes and add the &amp;quot;TestMethod&amp;quot; attribute to it.&amp;nbsp;&amp;nbsp; 
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="border: 1px solid black" src="/pics/silverlight3unittesting/FirstUnitTestingClass.jpg" alt="First Test Class" title="First Test Class" /&gt; 
+&lt;/div&gt;
+&lt;p&gt;
+&amp;nbsp;Finally, replace the root visual of your app with the Unit Test Launcher.&amp;nbsp; This is in your &lt;strong&gt;App.xaml.cs&lt;/strong&gt; code behind.&amp;nbsp; 
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="border: 1px solid black" src="/pics/silverlight3unittesting/ReplaceRootVisual.jpg" alt="Replace Root Visual" title="Replace Root Visual" width="655" height="151" /&gt;&amp;nbsp; 
+&lt;/div&gt;
+&lt;p&gt;
+That&amp;#39;s it.&amp;nbsp; Now we run our application again.&amp;nbsp; Set the startup to the web app and make sure the start page is the test page.&amp;nbsp; We see the result of my single passing test in a display similar to &lt;a href="http://www.nunit.org/index.php"&gt;NUnit&lt;/a&gt;. 
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="border: 1px solid black" src="/pics/silverlight3unittesting/UnitTestPageResult.jpg" alt="Unit Test Page Result" title="Unit Test Page Result" width="670" height="161" /&gt; 
+&lt;/div&gt;
+&lt;p&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p&gt;
+That&amp;#39;s it for how to setup Unit Testing with Silverlight 3.&amp;nbsp; This framework comes with number of attributes and assertions supported by the original Unit Testing framework. 
+&lt;/p&gt;
+&lt;p&gt;
+&lt;strong&gt;Next time,&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+we&amp;#39;ll use the Silverlight Unit Testing Framework and apply Test-Driven Development to create a model GameBoard.&amp;nbsp; 
+&lt;/p&gt;
+</content>
+  <ispublished>True</ispublished>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2009-08-12 20:37:00</pubDate>
+  <lastModified>2009-08-17 21:19:34</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Silverlight-3-Unit-Testing-The-Gameboard</slug>
+  <tags>
+    <tag>unit testing</tag>
+    <tag>web</tag>
+    <tag>silverlight</tag>
+  </tags>
+  <comments />
+  <categories>
+    <category>1f7b77d6-2725-4eb8-853d-79dc6cd05bfd</category>
+    <category>f1c814c6-7998-4d6e-b751-366d1c7b195d</category>
+  </categories>
+  <notifications />
+</post>

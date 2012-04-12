@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Showcase.master.cs" Inherits="MasterPages_Showcase" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="formMain" runat="server">
+    <!--
+        Try to use different div's and position them by float instead of a table
+    -->
+    <center>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div id="divAll" style="position:relative; width:1000px; height:2000px; border:solid 1px gray;">
+            <div id="divNavigation" style="position:absolute; left:0px; top:0px; width:15%; height:100%; border-right:solid 1px gray;">
+                <br />
+                Navigation
+                <br />
+                <br />
+                <div style="text-align:left; margin-left:10px;">
+                    <a href="../Showcase/GameBoard_Phase1.aspx">Ph1 - Game Board</a><br />
+                    <a href="../Showcase/GameBoard_Phase2.aspx">Ph2 - The Game</a><br />
+                    <a href="../Showcase/GameBoard_Phase3.aspx">Ph3 - Battle</a><br />
+                </div>
+            </div>           
+            <div id="divHeader" style="position:absolute; left:150px; width:85%;  height:50px; border:solid 0px blue;">
+                <asp:ContentPlaceHolder id="ContentPlaceHolderTop" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="divMain" style="position:absolute;left:150px; top:50px;width:85%;border:solid 0px blue;">
+                <asp:ContentPlaceHolder id="ContentPlaceHolderMain" runat="server">                
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </center>
+    </form>
+</body>
+</html>

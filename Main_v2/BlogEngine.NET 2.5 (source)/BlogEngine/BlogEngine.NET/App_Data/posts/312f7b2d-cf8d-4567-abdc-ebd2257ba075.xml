@@ -1,0 +1,1802 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>IIS7 Permissions – IUSRS and IIS_IUSR</title>
+  <description>IIS7 Permissions – IUSRS and IIS_IUSR</description>
+  <content>&lt;p&gt;
+Setting up access control permissions on Windows 7 for a new website hosted under the &lt;em&gt;wwwroot&lt;/em&gt; is not difficult, because you don&amp;rsquo;t have to do anything.
+But if you&amp;rsquo;re hosting a website from a virtual directory outside of the &lt;em&gt;wwwroot&lt;/em&gt; you might get this error:
+&lt;br /&gt;
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="width: 600px" class="image" src="/pics/Blog_IIS7Access/1_IIS7Error_Configuration.png" alt="IIS7 Configuration Error" /&gt;
+&lt;br /&gt;
+&lt;em&gt;The requested page cannot be accessed because the related configuration data for the page is invalid&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;After close examination this is a permission issue.
+You may also get this error if you&amp;rsquo;ve only solved half the problem:
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img style="width: 600px" class="image" src="/pics/Blog_IIS7Access/2_IIS7Error_Permission.png" alt="IIS7 Permission Error" /&gt;
+&lt;br /&gt;
+&lt;em&gt;You do not have permission to view this directory or page because of the access control list (ACL) configuration or encryption settings for this resource on the Web server&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;
+&amp;nbsp;
+&lt;/p&gt;
+You need to grant permission to 2 entities using Windows Explorer security controls:
+&lt;br /&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;strong&gt;IUSRS&lt;/strong&gt;  - The new default account used for anonymous authentication&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;IIS_IUSRS&lt;/strong&gt; &amp;ndash; A new built-in group serving as a container for all application pool identities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;By default, these objects have access to &lt;em&gt;wwwroot&lt;/em&gt; (&lt;strong&gt;IUSR&lt;/strong&gt; has access under the 
+&lt;strong&gt;Users&lt;/strong&gt; group).  
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;img class="image" src="/pics/Blog_IIS7Access/3_wwwrootPermissions.png" alt="wwwroot permissions" /&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+They need the same permissions for your respective website&amp;rsquo;s directory.  
+&lt;br /&gt;
+Instructions below:
+&lt;p&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;Navigate to your website&amp;rsquo;s directory.  Right-click and bring up the Properties menu.  Under the Security menu, click Edit to change permissions.&lt;/li&gt;
+	&lt;br /&gt;
+	&lt;div style="text-align: center"&gt;
+	&lt;img class="image" src="/pics/Blog_IIS7Access/5_SecurityMenu.png" alt="Security Menu" /&gt;
+	&lt;/div&gt;
+	&lt;br /&gt;
+	&lt;li&gt;Click Add to add another object to the access list.  Type in &amp;ldquo;IUSR&amp;rdquo; and click Check Names to verify.  Click Ok.&lt;/li&gt;
+	&lt;br /&gt;
+	&lt;div style="text-align: center"&gt;
+	&lt;img class="image" src="/pics/Blog_IIS7Access/6_AddUserPermission.png" alt="Add User Permission" /&gt;
+	&lt;/div&gt;
+	&lt;br /&gt;
+	&lt;li&gt;By default the typical &amp;ldquo;Read&amp;rdquo; permissions should be checked.  Repeat step 2 typing in the group &amp;ldquo;IIS_IUSRS&amp;rdquo; instead.&lt;/li&gt;
+	&lt;br /&gt;
+	&lt;div style="text-align: center"&gt;
+	&lt;img class="image" src="/pics/Blog_IIS7Access/7_ReadPermissions.png" alt="Read Permissions" /&gt;
+	&lt;/div&gt;
+	&lt;br /&gt;
+	&lt;li&gt;Click Ok to close the properties dialogue.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+Now you&amp;rsquo;re ready to rock&amp;rsquo;n&amp;rsquo;roll with a website hosted under IIS 7!
+For a more detailed explanation of the new entities please refer to the article below:
+&lt;/p&gt;
+&lt;a href="http://learn.iis.net/page.aspx/140/understanding-built-in-user-and-group-accounts-in-iis/"&gt;
+Understanding Built-in User and Group Accounts in IIS
+&lt;/a&gt;
+</content>
+  <ispublished>True</ispublished>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2011-12-18 01:42:00</pubDate>
+  <lastModified>2011-12-31 16:59:25</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>IIS7-Permissions-e28093-IUSRS-and-IIS_IUSR</slug>
+  <tags>
+    <tag>iis</tag>
+    <tag>iis7</tag>
+    <tag>infrastructure</tag>
+    <tag>security</tag>
+    <tag>web</tag>
+  </tags>
+  <comments>
+    <comment id="a32d0be9-5c73-4d35-8670-da8a97b722e3" approved="False">
+      <date>2011-12-19 06:34:46</date>
+      <author>Ley de la Atraccion</author>
+      <email>barnabyposey83@hotmail.com</email>
+      <country>us</country>
+      <ip>109.230.222.204</ip>
+      <website>http://atraccion.org/</website>
+      <content>Just the kind of hard data I was looking for. Now I can understand what I read in the newspaper the other day and not sit in a cloud of wonder any longer.</content>
+    </comment>
+    <comment id="12e1dc23-15e0-48a5-92d1-7af01d13aaaa" approved="False">
+      <date>2011-12-22 02:01:06</date>
+      <author>Gertie Durrell</author>
+      <email>Plastow66@live.com</email>
+      <country>us</country>
+      <ip>111.250.56.118</ip>
+      <website>http://www.x41oxygen.com/how-to-choose-the-right-jacket-for-your-guy/673/</website>
+      <content>I'll be back here for sure.</content>
+    </comment>
+    <comment id="80244c97-ad40-4c3a-8325-41806144a15e" approved="False">
+      <date>2011-12-23 03:46:43</date>
+      <author>Delphia Bukovsky</author>
+      <email>Tupacyupanqui6248@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.195.108</ip>
+      <website>http://www.youtube.com/watch?v=5uI2Et7uY8Y</website>
+      <content>Aw, this is an exceptionally good post. Nevertheless I am having issues with your Rss feed. I don't know precisely why yet I can't subscribe to it. There has to be someone receiving comparable issues? Anyone who knows please answer. All the best. Mikey</content>
+    </comment>
+    <comment id="21505e34-5cc4-440b-bbd2-7fe84fa14b01" approved="False">
+      <date>2011-12-23 08:05:08</date>
+      <author>lacoste store</author>
+      <email>Pangilinan@ymail.com</email>
+      <country>us</country>
+      <ip>180.245.127.196</ip>
+      <website>http://www.artifolio.com/tumkoto/29615/Be-Hip-and-in-Type-Each-day-With-Lacoste-Polo_1.html</website>
+      <content>I'm extremely impressed with your writing skills and also with the layout on your weblog. Is this a paid theme or did you customize it yourself? Either way keep up the nice quality writing, it’s rare to see a great blog like this one these days..</content>
+    </comment>
+    <comment id="f3d7bc49-8b0d-48ce-9efa-ff72e4f9ec0b" approved="False">
+      <date>2011-12-23 08:45:43</date>
+      <author>Georgianna Bevans</author>
+      <email>Boosalis4587@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.168.136</ip>
+      <website>http://www.youtube.com/watch?v=5uI2Et7uY8Y</website>
+      <content>You ought to be a part of a contest for one of the greatest weblogs on the internet. I'd fully advocate this website! I should say also mentioned yourself on my very own Myspace account, ideally that's ok. </content>
+    </comment>
+    <comment id="cd4399b4-97e7-4f58-9d73-b97c5277f886" approved="False">
+      <date>2011-12-24 10:20:03</date>
+      <author>ralph lauren polo sale</author>
+      <email>Eastwood@ymail.com</email>
+      <country>us</country>
+      <ip>110.138.183.60</ip>
+      <website>http://tumkoto.noahblog.com/2011/12/19/ralph-lauren-outlet-help-keep-in-a-big-luxury-easliy-for-your-house/</website>
+      <content>Thing you are talking about a lot of sense. Yet, consider this, let’s suppose you integrated a little more? I am talking about, I do not want to teach how to run your site, however if you added something which could grab people’s particular attention? Just as a video or simply a graphic or maybe few for getting people psyched concerning what you are talking about.</content>
+    </comment>
+    <comment id="a112b417-1664-4ae1-929b-2d5b555673e9" approved="False">
+      <date>2011-12-24 14:38:24</date>
+      <author>Joe Valin</author>
+      <email>Arya@yahoo.com</email>
+      <country>us</country>
+      <ip>108.62.208.39</ip>
+      <website>http://coffeemuggift.gourmetgiftscheaponline.com/thinking-of-you-gift-basket/</website>
+      <content>After research just a few of the weblog posts in your web site now, and I actually like your method of blogging. I bookmarked it to my bookmark web site listing and will likely be checking back soon. Pls check out my web page as properly and let me know what you think.</content>
+    </comment>
+    <comment id="c11dd2a2-0926-4f92-84f4-b655c107f39e" approved="False">
+      <date>2011-12-24 22:56:31</date>
+      <author>Rashad Milderberger</author>
+      <email>Liccketto3015@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.220.103</ip>
+      <website>http://www.youtube.com/watch?v=5uI2Et7uY8Y</website>
+      <content>You ought to take part in a contest for one of the best blogs on-line. We would absolutely propose this great site! Furthermore, I brought up you on my very own Bebo internet page, ideally that's cool. </content>
+    </comment>
+    <comment id="8ebc7b04-0a58-47b1-bfba-336328db5b2f" approved="False">
+      <date>2011-12-25 05:51:35</date>
+      <author>Rosendo Bankos</author>
+      <email>Scherler5076@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.220.103</ip>
+      <website>http://www.youtube.com/watch?v=BWfCyafGdnI</website>
+      <content>You should be a part of a contest for one of the greatest information sites on the web. I'd totally endorse this web site! In addition, I talked about you on my own Twitter account, ideally this is cool. </content>
+    </comment>
+    <comment id="51b9f95b-7d64-4e38-b591-25e2704f3194" approved="False">
+      <date>2011-12-25 10:56:17</date>
+      <author>Lenna Amin</author>
+      <email>Mattina99@gmail.com</email>
+      <country>us</country>
+      <ip>173.208.86.151</ip>
+      <website>http://badbreathx.info/?p=113</website>
+      <content>Aw, this was a really nice post. In idea I wish to put in writing like this moreover – taking time and actual effort to make an excellent article… however what can I say… I procrastinate alot and certainly not seem to get something done.</content>
+    </comment>
+    <comment id="3d5794ee-52a8-4de3-94db-3dadc760a605" approved="False">
+      <date>2011-12-27 12:57:08</date>
+      <author>Chelsey Ciucci</author>
+      <email>Erdahl68@yahoo.com</email>
+      <country>us</country>
+      <ip>173.234.31.244</ip>
+      <website>http://www.chaodosmeninos.org/re-kindling-my-love-for-cowboy-boots/686/</website>
+      <content>Thanks for posting! it really helped me out here.</content>
+    </comment>
+    <comment id="c4eaa7f2-1625-4197-a7ae-c4bd970e1ff1" approved="False">
+      <date>2011-12-27 22:54:12</date>
+      <author>Maria Menton</author>
+      <email>Miyao1882@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.220.103</ip>
+      <website>http://www.youtube.com/watch?v=uuR8aLRTBDs</website>
+      <content>Intriguing...not really entirely positive that I understand it all but thanks for finding the time to clarify that in this sort of detail. I got an malfunction note when I tried to join your Feed though. Anybody here owning that problem?</content>
+    </comment>
+    <comment id="709f4657-bc13-4690-92d7-536ed369c36a" approved="False">
+      <date>2011-12-28 00:06:22</date>
+      <author>Wendie Altic</author>
+      <email>Ladouce896@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.220.103</ip>
+      <website>http://www.youtube.com/watch?v=5uI2Et7uY8Y</website>
+      <content>You ought to be a part of a contest for one of the best information sites on the net. We would 100 % advise this great site! Also, I mentioned yourself on my Bebo internet page, ideally that is okay. </content>
+    </comment>
+    <comment id="31acc260-369a-42eb-8ade-0d605141165d" approved="False">
+      <date>2011-12-28 06:50:52</date>
+      <author>Christopher Pfau</author>
+      <email>Orpha_Skog@gmail.com</email>
+      <country>us</country>
+      <ip>190.248.67.138</ip>
+      <website>http://xtrstudios.com/submit-lyrics/</website>
+      <content>Nice post. I was checking continuously this website and I'm impressed! Extremely useful info especially the last part I care for such info much. I was looking for this specific info for a long time. Thankyou and best of luck.</content>
+    </comment>
+    <comment id="09242dd2-bb03-4355-b0ad-03cdc99047e5" approved="False">
+      <date>2012-01-10 06:40:10</date>
+      <author>abercrombie sale online</author>
+      <email>Laborin1@gmail.com</email>
+      <country>us</country>
+      <ip>76.118.68.75</ip>
+      <website>http://koto889.mywapblog.com/abercrombie-fitch-womens-fleece-txt.xhtml</website>
+      <content>Thank you for the auspicious writeup. It in fact was a amusement account it. Look advanced to far added agreeable from you! By the way, how can we communicate?</content>
+    </comment>
+    <comment id="efa87914-935d-4cc4-9752-2c33fa21a725" approved="False">
+      <date>2012-01-10 17:58:23</date>
+      <author>Latterkursus</author>
+      <email>Jehlicka@hotmail.com</email>
+      <country>us</country>
+      <ip>176.31.50.95</ip>
+      <website>http://www.latterkursus.dk/latterkursus/</website>
+      <content>What I 'm is very happy with your post - you will definitely. Here is the forms of hands to get delivered certainly not these pet buzz and that is with all the every other blog. Acknowledge those blogging these very best doctor.</content>
+    </comment>
+    <comment id="bb1d0fb8-56e8-4546-aff5-5854bdb1d360" approved="False">
+      <date>2012-01-10 19:17:15</date>
+      <author>Sondra Sunniga</author>
+      <email>111Baeza@gmail.com</email>
+      <country>us</country>
+      <ip>125.163.201.154</ip>
+      <website>http://www.wowgold12345.com/</website>
+      <content>I adore this web page but I cannot actually download this images. Im just using a mobile computer if it can help. Well cheers.&amp;lt;a href=&amp;quot;http://www.wowgold12345.com&amp;quot;&amp;gt;buy wow gold&amp;lt;/a&amp;gt;	</content>
+    </comment>
+    <comment id="38219a5d-00c0-4f04-8724-f3520d77b76c" approved="False">
+      <date>2012-01-10 21:49:37</date>
+      <author>anunturi gratuite online</author>
+      <email>Hassian3527@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.43.146</ip>
+      <website>http://totalvest.ro/anunturi-pe-judete</website>
+      <content>My husband and i have been so fulfilled that Jordan managed to round up his preliminary research through your ideas he acquired out of the site. It's not at all simplistic to just possibly be freely giving steps that many the rest have been making money from. We already know we need you to give thanks to for that. The explanations you have made, the straightforward web site menu, the relationships you can help instill  it is mostly awesome, and it's really assisting our son in addition to us consider that the idea is satisfying, and that is seriously essential. Thank you for all!</content>
+    </comment>
+    <comment id="26a54349-186f-4f94-8dc0-4f838625eda6" approved="False">
+      <date>2012-01-11 02:38:36</date>
+      <author>boiler repair</author>
+      <email>meulkwyznco063@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.8.38</ip>
+      <website>http://plumbers999.co.uk/</website>
+      <content>How is it that just anybody can write a blog and get as popular as this? Its not like youve said anything incredibly impressive --more like youve painted a pretty picture over an issue that you know nothing about! I dont want to sound mean, here. But do you really think that you can get away with adding some pretty pictures and not really say anything?</content>
+    </comment>
+    <comment id="0862a272-467a-48b9-86df-86e75935ad00" approved="False">
+      <date>2012-01-11 04:24:09</date>
+      <author>ralph lauren stores online</author>
+      <email>Arvanitis@ymail.com</email>
+      <country>us</country>
+      <ip>180.249.126.169</ip>
+      <website>http://www.avicred.net/bbs/boke.asp?nkyr587ul.showtopic.30114.html</website>
+      <content>Thank you for the auspicious writeup. It in fact was a amusement account it. Look advanced to far added agreeable from you! However, how can we communicate?</content>
+    </comment>
+    <comment id="3e567d30-402b-4589-a996-416499d12800" approved="False">
+      <date>2012-01-11 11:19:04</date>
+      <author>cheap abercrombie</author>
+      <email>Fukuda8@gmail.com</email>
+      <country>us</country>
+      <ip>190.237.121.202</ip>
+      <website>http://koto889.noahblog.com/2011/12/26/womens-t-shirts-womens-terrific-beauty/</website>
+      <content>I became just browsing occasionally in addition to you just read this post. I need to admit that we are within the hand of luck today if not owning such an excellent write-up to determine wouldn’t are achievable for me, at the incredibly least. Really enjoy your content.</content>
+    </comment>
+    <comment id="9f79a04f-ddf7-4e58-add4-1cf12092d41d" approved="False">
+      <date>2012-01-11 21:42:50</date>
+      <author>ralph lauren sale online</author>
+      <email>Bigney@ymail.com</email>
+      <country>us</country>
+      <ip>186.96.253.100</ip>
+      <website>http://koto889.insanejournal.com/6668.html</website>
+      <content>Just want to say your article is as surprising. The clarity in your post is just spectacular and i can assume you are an expert on this subject. Fine with your permission allow me to grab your RSS feed to keep updated with forthcoming post. Thanks a million and please carry on the enjoyable work.</content>
+    </comment>
+    <comment id="130a2683-063c-4611-a2fa-60e6ba1b0a06" approved="False">
+      <date>2012-01-12 02:40:48</date>
+      <author>ralph lauren polo sale</author>
+      <email>Fukuda8@gmail.com</email>
+      <country>us</country>
+      <ip>177.52.64.5</ip>
+      <website>http://koto889.smartlog.dk/our-nike-air-max--our-football-team-1-post353769</website>
+      <content>Nice blog here! Also your website loads up very fast! What host are you using? Can I get your affiliate link to your host? I wish my web site loaded up as quickly as yours lol</content>
+    </comment>
+    <comment id="f7829243-75f8-4987-b64a-289349499091" approved="False">
+      <date>2012-01-12 07:12:18</date>
+      <author>aer conditionat</author>
+      <email>jp.hoornstra@inlandnewspapers.com</email>
+      <country>us</country>
+      <ip>188.26.43.132</ip>
+      <website>http://www.topaerconditionat.ro/</website>
+      <content>I worked for really useful information about the sector was a good article I congratulate you to share your writing with social networking</content>
+    </comment>
+    <comment id="0c061d51-2231-4ec9-a865-35aea799bcaf" approved="False">
+      <date>2012-01-12 11:23:49</date>
+      <author>hidrofor</author>
+      <email>wilfordrichm716@yahoo.co.uk</email>
+      <country>us</country>
+      <ip>188.26.43.132</ip>
+      <website>http://www.einstal.ro/57-hidrofoare</website>
+      <content>Between me and my husband we've owned more MP3 players over the years than I can count, including Sansas, iRivers, iPods (classic &amp;amp; touch), the Ibiza Rhapsody, etc. But, the last few years I've settled down to one line of players. Why? Because I was happy to discover how well-designed and fun to use the underappreciated (and widely mocked) Zunes are.</content>
+    </comment>
+    <comment id="296b424a-5f8f-45d1-91f3-23f070d17013" approved="False">
+      <date>2012-01-12 13:15:06</date>
+      <author>deep cleaning kitchen</author>
+      <email>rajesh87smart@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.42.70</ip>
+      <website>http://www.cleaning-direct.co.uk/</website>
+      <content>You have observed very interesting points ! ps decent web site . &amp;quot;Loneliness seems to have become the great American disease.&amp;quot; by John Corry.</content>
+    </comment>
+    <comment id="1b61bb5c-7c79-4e64-80df-6ac42a402b79" approved="False">
+      <date>2012-01-12 19:38:25</date>
+      <author>Mirta Soans</author>
+      <email>942Walton@gmail.com</email>
+      <country>us</country>
+      <ip>211.21.230.244</ip>
+      <website>http://www.callsdata.com/blog/view/116097/greatest-amazing-progressing-manual-through-dugi</website>
+      <content>Sources like the one you talked about right here will probably be very useful to me! I will submit a link to this web page on my blog. I am sure my guests will discover that very useful. Large thanks for the useful data i discovered on Domain Information Anyway, in my language, there arent much good supply like this.</content>
+    </comment>
+    <comment id="554475fd-fdbf-41cc-bbee-2eb2de66bd7e" approved="False">
+      <date>2012-01-13 00:10:41</date>
+      <author>ralph lauren stores online</author>
+      <email>Dally@ymail.com</email>
+      <country>us</country>
+      <ip>186.96.253.100</ip>
+      <website>http://fuckingnastyshit.com/index.php?p=blogs/viewstory/160633</website>
+      <content>Hello there, just became aware of your blog through Google, and found that it's truly informative. I’m gonna watch out for brussels. I’ll appreciate if you continue this in future. Lots of people will be benefited from your writing. Cheers!</content>
+    </comment>
+    <comment id="bed9f637-53c2-46f1-8690-d0a7911306a8" approved="False">
+      <date>2012-01-13 07:47:54</date>
+      <author>pompa submersibila</author>
+      <email>roman@wezacon.nl</email>
+      <country>us</country>
+      <ip>188.26.42.70</ip>
+      <website>http://www.einstal.ro/</website>
+      <content>The new Zune browser is surprisingly good, but not as good as the iPod's. It works well, but isn't as fast as Safari, and has a clunkier interface. If you occasionally plan on using the web browser that's not an issue, but if you're planning to browse the web alot from your PMP then the iPod's larger screen and better browser may be important.</content>
+    </comment>
+    <comment id="397ea47e-27f8-4e8c-bcea-31ee136260f5" approved="False">
+      <date>2012-01-13 15:00:03</date>
+      <author>anunturi timisoara</author>
+      <email>himanshu.kashyap.etc@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.42.70</ip>
+      <website>http://totalvest.ro/</website>
+      <content>With havin so much content do you ever run into any problems of plagorism or copyright violation? My blog has a lot of unique content I've either authored myself or outsourced but it seems a lot of it is popping it up all over the internet without my agreement. Do you know any ways to help protect against content from being stolen? I'd truly appreciate it.</content>
+    </comment>
+    <comment id="bec1b039-ec52-4886-825e-8b29df0a1d8a" approved="False">
+      <date>2012-01-13 23:28:58</date>
+      <author>stomatolog</author>
+      <email>ninswgrurfn075@hotmail.com</email>
+      <country>us</country>
+      <ip>188.26.42.206</ip>
+      <website>http://xandomed.ro/</website>
+      <content>Thanks for taking the time to discuss this, I really feel strongly about it and really like understanding a lot more on this topic. It reveals how properly you understand this topic If possible, as you achieve expertise, would you mind updating your weblog with extra facts? It's extremely helpful for anyone especially for me. By doing that hopefully you'll achieve additional visitors for your internet site and completely far more money. Great Luck for what ever you do. See you inside the top my friend. Best Regards Alden Nosbisch</content>
+    </comment>
+    <comment id="d3d0acdb-b25b-488c-8bb6-766ff041f02e" approved="False">
+      <date>2012-01-13 23:31:07</date>
+      <author>inchirieri masini otopeni</author>
+      <email>Abrahams@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.42.206</ip>
+      <website>http://directortravel.eu/</website>
+      <content>Nice post. I was checking constantly this blog and I'm impressed! Extremely helpful information specifically the last part I care for such info a lot. I was seeking this particular information for a long time. Thank you and best of luck.</content>
+    </comment>
+    <comment id="6d18f0f8-7e0d-4faf-aa48-f1eebfdf2b31" approved="False">
+      <date>2012-01-15 22:46:23</date>
+      <author>Green Hosting Green</author>
+      <email>administrator@webhostinggreen.com</email>
+      <country />
+      <ip>173.201.196.188</ip>
+      <website>http://webhostinggreen.com/</website>
+      <content>The truth that I found the writing excellent. I\\\'ve added to my favorites this URL.
+Greetings.</content>
+    </comment>
+    <comment id="6d22d019-9bc3-4920-9047-794484c88d44" approved="False">
+      <date>2012-01-16 21:33:51</date>
+      <author>Pia Poormon</author>
+      <email>Mazie_Muinos@gmail.com</email>
+      <country>us</country>
+      <ip>31.171.134.30</ip>
+      <content>Very good....... But how can I download in Pdf format...???????</content>
+    </comment>
+    <comment id="3e3febe8-5228-4848-9d1b-8c67ac91bbc9" approved="False">
+      <date>2012-01-18 10:29:17</date>
+      <author>Jonelle</author>
+      <email>Wisk@diamonds.net</email>
+      <country>us</country>
+      <ip>173.234.188.143</ip>
+      <website>http://seodublinireland442.blog.com/2012/01/18/successful-businesses-via-optimizing-search-engines/</website>
+      <content>Excellent, but it would be better if in future you can share more about this topic.</content>
+    </comment>
+    <comment id="06835f73-35c0-47e4-81a0-f0dd8c91a584" approved="False">
+      <date>2012-01-18 16:36:58</date>
+      <author>cazare busteni</author>
+      <email>jerryroberts2006@hotmail.com</email>
+      <country>us</country>
+      <ip>86.121.77.85</ip>
+      <website>http://cazare-pensiune-busteni.ro/</website>
+      <content>Thanks for the writeup. I definitely agree with what you are saying. I have been talking about this subject a lot lately with my brother so hopefully this will get him to see my point of view. Fingers crossed!</content>
+    </comment>
+    <comment id="dbb10715-3bf5-4a7f-8b9f-ee311570e39b" approved="False">
+      <date>2012-01-18 18:08:27</date>
+      <author>aspirator auto</author>
+      <email>mary.jacobs@uncp.edu</email>
+      <country>us</country>
+      <ip>188.26.43.176</ip>
+      <website>http://exmobi.ro/</website>
+      <content>I have to say, I dont know if its the clashing colours or the bad grammar, but this blog is hideous! I mean, I dont want to sound like a know-it-all or anything, but could you have possibly put a little bit more effort into this subject. Its really interesting, but you dont represent it well at all, man.</content>
+    </comment>
+    <comment id="e91b3a33-f5be-484f-b3ec-8964df3173cf" approved="False">
+      <date>2012-01-18 23:21:49</date>
+      <author>anunturi timisoara</author>
+      <email>vadivel_bca@rocketmail.com</email>
+      <country>us</country>
+      <ip>188.26.43.176</ip>
+      <website>http://totalvest.ro/anunturi-pe-judete</website>
+      <content>I believe that is among the such a lot vital information for me. And i'm glad reading your article. But should statement on some common issues, The website taste is great, the articles is in reality great : D. Just right task, cheers</content>
+    </comment>
+    <comment id="1b9f70cb-1c26-4277-86d4-e93c8f79abb3" approved="False">
+      <date>2012-01-19 01:56:35</date>
+      <author>electrician autorizat bucuresti</author>
+      <email>josiepirie@yahoo.com</email>
+      <country>us</country>
+      <ip>188.26.43.176</ip>
+      <website>http://www.electricianbucuresti.biz/</website>
+      <content>Will computer engineers in the philippines be able to have a licensure exam?</content>
+    </comment>
+    <comment id="c55f07b4-88cb-4793-a652-01e0fd8870b6" approved="False">
+      <date>2012-01-19 04:12:11</date>
+      <author>Dante Agonoy</author>
+      <email>Purchase@Adalat.Online</email>
+      <country>us</country>
+      <ip>188.26.43.176</ip>
+      <website>http://www.electricianbucuresti.biz/</website>
+      <content>Great read. I also think it could be a bit longer</content>
+    </comment>
+    <comment id="2202eddb-13ab-4c8a-8a1d-791bc64879b2" approved="False">
+      <date>2012-01-19 14:52:02</date>
+      <author>Trena Conceicao</author>
+      <email>Akuna9993@gmail.com</email>
+      <country>us</country>
+      <ip>188.26.42.241</ip>
+      <website>http://www.electricianbucuresti.biz/</website>
+      <content>That is some inspirational stuff. Never knew that opinions could be this varied. Thanks for all the enthusiasm to offer such helpful information here.</content>
+    </comment>
+    <comment id="48578af6-3f79-44a2-816e-bd64b28cd193" approved="False">
+      <date>2012-01-19 21:39:19</date>
+      <author>how to make a proxy server</author>
+      <email>Tyl@sbcglobal.net</email>
+      <country>us</country>
+      <ip>199.203.55.246</ip>
+      <website>http://microsofttechsupportnow.com/2011/microsoft-tech-support-to-set-up-a-proxy-server-in-windows-xp/</website>
+      <content>this was a prodigious segment thank you for the help.</content>
+    </comment>
+    <comment id="a69e6b40-fffe-4309-a43d-10a68de587a4" approved="False">
+      <date>2012-01-20 15:33:52</date>
+      <author>games de xbox 360</author>
+      <email>Baim40@gmail.com</email>
+      <country>us</country>
+      <ip>128.204.199.104</ip>
+      <website>http://www.squidoo.com/all-kind-of-funny-stuff</website>
+      <content>I'd work at banana</content>
+    </comment>
+    <comment id="89c10bea-890f-4aec-b125-708dbb1cc67b" approved="False">
+      <date>2012-01-21 05:44:48</date>
+      <author>wesele</author>
+      <email>Galjour@weselink.com</email>
+      <country>us</country>
+      <ip>222.124.21.18</ip>
+      <website>http://wyjdzzamnie.pl/</website>
+      <content>Thanks for the review. I bookmarked your site. Thanks. You are right. I’ve tried all these steps including commenting on otherblogs.. Very helpful information   This is my second visit to this blog!! We are starting a brand new initiative in the same category as this blog!! Stumbled into this site by chance but I’m sure glad I clicked on that link? Thank you for another great blog? Valuable information and excellent design you got here!!! I really like what you had to say.I thought it was going to be some boring old post, but it really compensated for my time. Aw, this was a really quality post. Took me awhile to read all the comments, but I really love the article.</content>
+    </comment>
+    <comment id="5100fc76-f791-41fb-a025-b3aff74ab87c" approved="False">
+      <date>2012-01-21 14:49:54</date>
+      <author>SEO Cambodia</author>
+      <email>Schwendeman@gmail.com</email>
+      <country>us</country>
+      <ip>81.102.67.237</ip>
+      <website>http://seo.charitycambodia.com/cambodia</website>
+      <content>Please add a link to our charity: &amp;lt;a href=&amp;quot;http://seo.charitycambodia.com&amp;quot;&amp;gt;Charity Cambodia&amp;lt;/a&amp;gt; on your site. Our mission is to provide free healthcare clinics throughout Cambodia for Poverty Striken Cambodians. Thank you for your support.  </content>
+    </comment>
+    <comment id="3dee1fad-8db2-4dec-8c13-cfd59f4821a2" approved="False">
+      <date>2012-01-22 11:31:44</date>
+      <author>link here</author>
+      <email>Manjarrez@sbcglobal.net</email>
+      <country>us</country>
+      <ip>201.39.137.216</ip>
+      <website>http://medbillingnewjersey.com/medical-insurance-billing/services-offered-by-medical-insurance-billing-companies/</website>
+      <content>this was a prodigious cut thank you for the help.</content>
+    </comment>
+    <comment id="7899120e-3371-443e-baa9-3abfe87ffed0" approved="False">
+      <date>2012-01-24 21:46:11</date>
+      <author>porn movies</author>
+      <email>fafopor@gmail.com</email>
+      <country>us</country>
+      <ip>69.147.248.94</ip>
+      <website>http://www.sratim-online.com/mhar14</website>
+      <content>Just thought i would comment and say neat theme, did you code it yourself? Looks great.</content>
+    </comment>
+    <comment id="8afed9e4-4b87-4fec-9adf-a337a12b866e" approved="False">
+      <date>2012-01-27 09:24:03</date>
+      <author>Elda Liberati</author>
+      <email>Micaela_Langston@hotmail.com</email>
+      <country>us</country>
+      <ip>101.109.8.98</ip>
+      <content>I don't get the last one, but the others are funny.</content>
+    </comment>
+    <comment id="a0d73ab8-f431-4fda-9557-88e6d450d1ae" approved="False">
+      <date>2012-01-28 00:14:03</date>
+      <author>blackhat seo forum</author>
+      <email>Eugena_Swicegood@yahoo.com</email>
+      <country>us</country>
+      <ip>176.31.155.1</ip>
+      <website>http://scrapebrokers.com/the-best-scrapebox-connection-settings</website>
+      <content>I observed your internet site via search engine several moment ago, and luckily, this really is the only info I was looking for the last hours</content>
+    </comment>
+    <comment id="7c5186da-40a9-480a-bf42-7403da0c93ac" approved="False">
+      <date>2012-01-28 06:08:09</date>
+      <author>2013 Mazda CX-5</author>
+      <email>Blaise450@yahoo.com</email>
+      <country>us</country>
+      <ip>173.198.228.62</ip>
+      <website>http://www.youtube.com/watch?v=KcHs-_-Iaag</website>
+      <content>Sweet blog! I found it while searching on Yahoo News. Do you have any tips on how to get listed in Yahoo News? I've been trying for a while but I never seem to get there! Cheers</content>
+    </comment>
+    <comment id="106bea83-cc86-473c-9148-9de67ad88766" approved="False">
+      <date>2012-01-28 12:24:40</date>
+      <author>Herbert Gurganus</author>
+      <email>Preister@gmail.com</email>
+      <country>us</country>
+      <ip>173.208.36.2</ip>
+      <website>http://www.googlers.com/</website>
+      <content>What’s Taking place i am new to this, I stumbled upon this I've found It absolutely helpful and it has aided me out loads. I hope to contribute &amp;amp; aid other customers like its helped me. Great job.</content>
+    </comment>
+    <comment id="c1e69f0b-f607-40e1-b567-6109a9f4aead" approved="False">
+      <date>2012-01-28 23:50:01</date>
+      <author>migue999</author>
+      <email>soloalguien101@hotmail.com</email>
+      <country />
+      <ip>69.175.104.162</ip>
+      <website>http://explotatusganancias.com/</website>
+      <content>Me parece bien lo mencionado aqui</content>
+    </comment>
+    <comment id="d6aa40bc-6b97-4e47-8f92-ec41f1741874" approved="False">
+      <date>2012-01-29 10:18:45</date>
+      <author>facebook marketing</author>
+      <email />
+      <country>us</country>
+      <ip>175.138.204.190</ip>
+      <content>awesome post. Would love to see more post from you</content>
+    </comment>
+    <comment id="1e0fb62b-dd41-4867-a5b9-e6d633e6181d" approved="False">
+      <date>2012-01-29 16:59:23</date>
+      <author>Moshe Sharper</author>
+      <email>Groszkiewicz@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.202.233</ip>
+      <website>http://forums.hyperic.com/jiveforums/profile.jspa?success=true&amp;userID=82474</website>
+      <content>Hey. Very cool blog!! Guy .. Excellent .. Superb .. I'll bookmark your website and take the feeds also...I'm satisfied to locate a lot of helpful information here within the post. Thanks for sharing..</content>
+    </comment>
+    <comment id="763676f6-5384-4967-ac02-c9ff9de7b1ff" approved="False">
+      <date>2012-01-30 00:22:56</date>
+      <author>dishwasher repair mclean va</author>
+      <email>nestorherrer718@hotmail.com</email>
+      <country>us</country>
+      <ip>68.98.189.85</ip>
+      <website>http://www.fairfaxappliancesrepair.com/</website>
+      <content>Cool stuff was searching the net for cool stuff and found this L)</content>
+    </comment>
+    <comment id="0f3e9c72-5d0e-4713-9c6f-e874ccd19bc4" approved="False">
+      <date>2012-01-30 01:49:57</date>
+      <author>Laveta Vielman</author>
+      <email>Sortino@gmail.com</email>
+      <country>us</country>
+      <ip>23.19.248.13</ip>
+      <website>http://glenharding1025.skyrock.com/3064843053-All-About-Air-Purifiers452.html</website>
+      <content>Hiya, I am really glad I have found this information. Nowadays bloggers publish only about gossip and web stuff and this is actually frustrating. A good website with interesting content, that's what I need. Thanks for making this web-site, and I'll be visiting again. Do you do newsletters? I Cant find it.</content>
+    </comment>
+    <comment id="e72e86e0-bab8-4b50-b05f-57cc611fe5eb" approved="False">
+      <date>2012-01-30 07:52:53</date>
+      <author>Favourite places to go</author>
+      <email />
+      <country>us</country>
+      <ip>78.164.95.188</ip>
+      <content>very nice post..i will keep on folllowing you.</content>
+    </comment>
+    <comment id="f76104c5-b380-4468-a290-6254ed6c4f04" approved="False">
+      <date>2012-01-30 07:57:54</date>
+      <author>Elsy Gier</author>
+      <email>Seidl3026@live.com</email>
+      <country>us</country>
+      <ip>85.93.199.34</ip>
+      <website>http://mag.ma/alfredocherr1229</website>
+      <content>To start with i voted to your chief executive however your dog hasnt executed precisely what she or he stated for you to do. Im sick of seeing the dog concerning telly and then the online. A effort to get a brand new deal with and a friend or relative in which 's coming as a result of with what people claim. Ron Robert appears to be one that will function. Demonstrate me personally some thumbs &amp;quot; up &amp;quot; or maybe you'll get some sort of arrow towards... really kiddingthe around: S</content>
+    </comment>
+    <comment id="136ed585-84cb-4fc1-8c7e-c8f63b10008d" approved="False">
+      <date>2012-01-30 23:44:50</date>
+      <author>Dr.Dre Headphones</author>
+      <email>Marousek@gmail.com</email>
+      <country>us</country>
+      <ip>72.52.108.203</ip>
+      <website>http://www.headphones-dr-dre.net/</website>
+      <content>I honestly loved reading your post. Thanks!A topic nearby to my crux cheers, do you have a RSS support ?</content>
+    </comment>
+    <comment id="8f4ec5a7-9a2f-4353-8a1c-61fe8920919d" approved="False">
+      <date>2012-01-31 01:22:49</date>
+      <author>UltraSepctra, Blog News, Blog Your mind...
+This is the best Choice!
+Please visit us www.ultraspectra.com</author>
+      <email />
+      <country>us</country>
+      <ip>182.177.123.143</ip>
+      <content>UltraSepctra...
+This is the best Choice!
+Please visit us www.ultraspectra.com</content>
+    </comment>
+    <comment id="ee85caeb-1b74-473d-84c4-aee53f7925e9" approved="False">
+      <date>2012-01-31 02:30:09</date>
+      <author>Florance</author>
+      <email>Lindley3300@yahoo.com</email>
+      <country>us</country>
+      <ip>195.162.69.212</ip>
+      <website>http://makita2012nb.com/</website>
+      <content>Posted your stuff, &amp;quot;Bryan Panjavan's Blog | IIS7 Permissions &amp;#226;€“ IUSRS and IIS_IUSR&amp;quot; at reddit. Thought you would want to know, Florance</content>
+    </comment>
+    <comment id="8194ccb2-0404-4ca9-a8b9-bebe706fe1ca" approved="False">
+      <date>2012-01-31 04:51:40</date>
+      <author>pozycjonowanie stron internetowych</author>
+      <email>Komarek@aol.com</email>
+      <country>us</country>
+      <ip>108.62.148.157</ip>
+      <website>http://macaujieda.com/2012/01/03/uslugi-seo-z-najwyzszej-pollki/</website>
+      <content>For latest news you have to visit internet and on the web I found this web page as a best website for newest updates.</content>
+    </comment>
+    <comment id="17aeb34b-3b73-4ce0-adda-9c6de667bbb4" approved="False">
+      <date>2012-01-31 05:15:20</date>
+      <author>Ami Contini</author>
+      <email>234Landham@refreshering.com</email>
+      <country>us</country>
+      <ip>107.22.219.19</ip>
+      <website>http://www.quechup.com/blog/entry/view/id/855237</website>
+      <content>I love your blog.. very nice colors and theme. Did you create this website yourself or did you hire someone to do it for you? Plz respond as I'm looking to design my own blog and would like to find out where u got this from. kudos</content>
+    </comment>
+    <comment id="ab57e31d-ff28-44c1-afab-57783db19325" approved="False">
+      <date>2012-01-31 05:17:27</date>
+      <author>Violette Hanisco</author>
+      <email>Madaline_Grantz@gmail.com</email>
+      <country>us</country>
+      <ip>81.17.30.79</ip>
+      <website>http://makemoneyblogging.org/category/blogging-basics/</website>
+      <content> Real   fantastic   information can be found on  site . </content>
+    </comment>
+    <comment id="f3d0b0b9-8378-4021-bd2f-07a24661f335" approved="False">
+      <date>2012-01-31 08:13:12</date>
+      <author>viagra</author>
+      <email>LaurenceDonnell73562@hotmail.com</email>
+      <country>us</country>
+      <ip>79.176.200.253</ip>
+      <website>http://www.viagra.gd/</website>
+      <content>Bounder Bound &amp;lt;a href=&amp;quot;http://www.viagra.gd&amp;quot;&amp;gt;Viagra&amp;lt;/a&amp;gt; Nice Bounder Bound!!! Get it got it good!! </content>
+    </comment>
+    <comment id="07a20ff5-05d5-4d30-ba18-b284db338e55" approved="False">
+      <date>2012-01-31 11:13:57</date>
+      <author>Keywords Here</author>
+      <email />
+      <country>us</country>
+      <ip>202.95.133.134</ip>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="c2737d97-9666-403e-b51b-7ad6c7b1a7e1" approved="False">
+      <date>2012-01-31 13:39:48</date>
+      <author>Sarah</author>
+      <email>Grider93@hotmail.co.uk</email>
+      <country>us</country>
+      <ip>173.208.19.6</ip>
+      <website>http://www.jan2912.co.uk/</website>
+      <content>Major thanks for the article post. Will read on…</content>
+    </comment>
+    <comment id="0279a50f-3d92-451a-91ba-9d1e5c2af4dd" approved="False">
+      <date>2012-01-31 21:28:43</date>
+      <author>SEO Services Montreal</author>
+      <email />
+      <country>us</country>
+      <ip>70.30.232.193</ip>
+      <content>Try our in SEO Services, </content>
+    </comment>
+    <comment id="2e2a913a-a8af-45f0-97ea-4e5c9bc2ea59" approved="False">
+      <date>2012-02-01 21:35:15</date>
+      <author>custom essays</author>
+      <email>samantablackeyes@gmail.com</email>
+      <country>ca</country>
+      <ip>31.184.238.21</ip>
+      <website>http://www.exclusivepapers.com/</website>
+      <content>To know just about this post, we buy research papers or custom essays at the custom writing services. A lot of term paper writing services propose the essay writing just about this post. </content>
+    </comment>
+    <comment id="1b5ee852-b404-48ab-89b4-654ef843f4d0" approved="False">
+      <date>2012-02-02 17:29:25</date>
+      <author>Window Replacement</author>
+      <email>nestorherrer718@hotmail.com</email>
+      <country>us</country>
+      <ip>108.18.7.213</ip>
+      <website>http://www.virginiaglasswindow.com/</website>
+      <content>although internet websites we backlink to below are considerably not connected to ours, we feel they are actually worth a go by means of, so possess a look[...]
+[...]very handful of web sites that take place to become in depth beneath, from our point of view are undoubtedly properly really worth checking out[...]</content>
+    </comment>
+    <comment id="203825fc-3312-4cd7-8c09-e6c6688e5a30" approved="False">
+      <date>2012-02-03 03:10:57</date>
+      <author>free virtual private server</author>
+      <email>Shew@atlanticmetro.net</email>
+      <country>us</country>
+      <ip>204.145.81.38</ip>
+      <website>http://ja-obcan.info/forum/profile.php?id=230656</website>
+      <content>Stellar subject , I really am trying how to make my blog this good looking !</content>
+    </comment>
+    <comment id="eff5a80a-671d-4ab2-a052-62ba6731265a" approved="False">
+      <date>2012-02-03 04:46:01</date>
+      <author>erotyka</author>
+      <email>Bubar28922@yahoo.com</email>
+      <country>us</country>
+      <ip>94.42.6.104</ip>
+      <website>http://sex.gix.pl/</website>
+      <content>An attractive discussion is value comment. I believe that you need to write extra on this matter, it might not be a taboo topic but generally persons are not enough to speak on such topics. To the next.</content>
+    </comment>
+    <comment id="9a04d94a-70a3-4514-a0be-37d2088a87c1" approved="False">
+      <date>2012-02-03 12:37:55</date>
+      <author>anonse towarzyskie</author>
+      <email>Kurth940@gmail.com</email>
+      <country>us</country>
+      <ip>82.143.166.88</ip>
+      <website>http://www.kroliczek.org/</website>
+      <content>If you're still on the fence: grab your favorite earphones, head down to a Best Buy and ask to plug them into a Zune then an iPod and see which one sounds better to you, and which interface makes you smile more. Then you'll know which is right for you. </content>
+    </comment>
+    <comment id="bb877ce4-0981-406b-b968-1bd1ea4f1a2b" approved="False">
+      <date>2012-02-04 09:41:13</date>
+      <author>applique patterns</author>
+      <email>AppliqueDesigns0@hotmail.com</email>
+      <country>us</country>
+      <ip>94.60.168.222</ip>
+      <website>http://appliquepatterns.posterous.com/appliques-design-how-to-with-regard-to-machin</website>
+      <content>I wanted to send you this very little remark in order to say thank you once again on the nice information you have contributed in this article. It has been quite pretty generous with people like you to allow extensively what many individuals could possibly have offered as an electronic book to earn some cash on their own, chiefly now that you could have tried it in the event you wanted. The tricks also worked like the fantastic way to fully grasp some people have the same dreams just like my very own to learn good deal more on the subject of this issue. I am certain there are millions of more fun moments in the future for people who scan through your site.
+I want to express my appreciation to you for bailing me out of this particular setting. After surfing around through the world wide web and coming across basics that were not powerful, I was thinking my life was done. Existing devoid of the answers to the issues you've sorted out by way of the article content is a serious case, as well as the kind which may have in a wrong way affected my entire career if I hadn't discovered your blog. Your primary mastery and kindness in maneuvering a lot of stuff was helpful. I don't know what I would have done if I had not come upon such a thing like this. It's possible to at this moment look ahead to my future. Thanks very much for the high quality and result oriented guide. I will not think twice to propose your site to anyone who should receive guidance on this situation.
+I actually wanted to compose a brief word to say thanks to you for the wonderful information you are sharing here. My considerable internet research has now been compensated with wonderful facts and strategies to talk about with my close friends. I 'd say that most of us visitors actually are unquestionably blessed to be in a superb place with very many lovely professionals with insightful principles. I feel quite happy to have come across the web pages and look forward to really more exciting times reading here. Thanks a lot once again for a lot of things.
+Thanks a lot for providing individuals with a very pleasant opportunity to check tips from this web site. It is often so good and full of a lot of fun for me personally and my office friends to visit your web site really thrice weekly to find out the latest stuff you have got. Of course, I'm just actually astounded for the extraordinary knowledge you serve. Selected 4 tips in this article are indeed the most beneficial we have all ever had.
+I have to express my respect for your generosity supporting individuals that actually need help with in this idea. Your special commitment to passing the message all around appears to be amazingly informative and have in every case helped folks like me to reach their targets. Your amazing helpful publication signifies this much to me and even more to my office workers. With thanks; from everyone of us.
+I and my buddies happened to be digesting the excellent recommendations located on your web blog then immediately got a horrible feeling I never expressed respect to the web blog owner for those secrets. The men happened to be for that reason glad to study them and have in effect actually been tapping into them. Many thanks for really being considerably considerate and for picking out varieties of fabulous guides most people are really desirous to learn about. My personal sincere regret for not expressing gratitude to  sooner.
+I am writing to make you understand what a beneficial discovery my princess found viewing the blog. She discovered a lot of details, which included how it is like to possess a wonderful teaching spirit to make many others with ease know some complex matters. You undoubtedly did more than people's expected results. Many thanks for delivering these essential, trustworthy, revealing and in addition cool tips on this topic to Tanya.
+I simply desired to appreciate you once more. I'm not certain what I could possibly have achieved without the ideas contributed by you about such a area of interest. It actually was a real frustrating difficulty for me personally, but witnessing a new skilled way you handled it forced me to jump with contentment. Now i'm happier for the guidance and then expect you comprehend what an amazing job you happen to be undertaking instructing people with the aid of your webpage. I am certain you haven't got to know all of us.
+My husband and i were now cheerful</content>
+    </comment>
+    <comment id="59682cd6-a41d-446b-a468-264f92405d05" approved="False">
+      <date>2012-02-04 13:50:35</date>
+      <author>Catholic, Christian, inner fire, God, intimacy with God, meditation, heart, sacred heart of Jesus, Mary, Christ, heart patient</author>
+      <email />
+      <country>us</country>
+      <ip>24.125.169.167</ip>
+      <content>Life from a Catholic perspective, learn the mysteries of life, love, and peace from a former monk.  Seek and you shall find.  </content>
+    </comment>
+    <comment id="af23a48f-8a3c-46eb-89b4-6eacfe250df2" approved="False">
+      <date>2012-02-04 20:13:27</date>
+      <author>business blog</author>
+      <email>Kozloski@business1300numbers.com</email>
+      <country>us</country>
+      <ip>173.234.211.248</ip>
+      <website>http://www.themininginvestment.com/</website>
+      <content>The telecommunications world is so massive, loved reading your post - I will wait your future posts.</content>
+    </comment>
+    <comment id="ec3af933-973d-4673-8e28-402d0c4a371c" approved="False">
+      <date>2012-02-05 14:08:24</date>
+      <author>Angelika Monegro</author>
+      <email>Jean_Difrancisco@hotmail.com</email>
+      <country>us</country>
+      <ip>176.31.155.1</ip>
+      <website>http://scrapebrokers.com/category/autoapprovelists</website>
+      <content>Thank you for this post Alex. This is some information that can be very useful if you know how to take advantage of it and you pointed a few useful tips about how to do it, especially the one with guest posting on government approved websites and as you said, these links have a much greater value than the ones from a regular site.</content>
+    </comment>
+    <comment id="1c8ccaf8-a898-4169-ac98-b371605f3551" approved="False">
+      <date>2012-02-05 17:39:44</date>
+      <author>pozycjonowanie kielce</author>
+      <email>Packham@aol.com</email>
+      <country>us</country>
+      <ip>108.62.148.157</ip>
+      <website>http://nanjingusa.org/forum/index.php?action=profile;u=67390</website>
+      <content>This paragraph is actually a pleasant one it helps new web people, who are wishing in favor of blogging.</content>
+    </comment>
+    <comment id="3d1c74a2-c7a8-4ccf-82e1-07319b783005" approved="False">
+      <date>2012-02-05 22:52:02</date>
+      <author>lose weight</author>
+      <email>Koepf67495@gmail.com</email>
+      <country>us</country>
+      <ip>208.69.116.246</ip>
+      <website>http://weightlossprogramthatwork.info/</website>
+      <content>There is definitely a bundle to know about this. I assume you made certain nice points in features also.</content>
+    </comment>
+    <comment id="fce00306-e7c5-4cf4-aa96-45812681a574" approved="False">
+      <date>2012-02-06 00:37:19</date>
+      <author>Applinace Repair Alexandria</author>
+      <email>arielbradley12@hotmail.com</email>
+      <country>us</country>
+      <ip>68.98.189.85</ip>
+      <website>http://www.alexandriaappliancesrepair.com/</website>
+      <content>always a significant fan of linking to bloggers that I appreciate but do not get lots of link appreciate from</content>
+    </comment>
+    <comment id="b253e91b-7d3e-43aa-8fcc-911d099cf45c" approved="False">
+      <date>2012-02-06 06:22:48</date>
+      <author>military</author>
+      <email>Pomainville@aol.com</email>
+      <country>us</country>
+      <ip>108.62.94.144</ip>
+      <website>http://abl-wnetrza.pl/</website>
+      <content>I am cheerful to see this you tube video at this web page, therefore now I am also going to add all my videos at YouTube web page.</content>
+    </comment>
+    <comment id="b9dc9abf-4406-4610-8e92-a6966e8f81d9" approved="False">
+      <date>2012-02-06 12:04:26</date>
+      <author>weight loss</author>
+      <email>Knehans73382@gmail.com</email>
+      <country>us</country>
+      <ip>208.69.116.246</ip>
+      <website>http://bestwaytolooseweight.info/</website>
+      <content>I am often to blogging and i really appreciate your content. The page has really peaks my interest. I am going to bookmark your site and keep checking for new information.</content>
+    </comment>
+    <comment id="be02ba4f-0dbb-4cb4-8a84-d56895a98349" approved="False">
+      <date>2012-02-06 13:31:12</date>
+      <author>Keywords Here</author>
+      <email />
+      <country>us</country>
+      <ip>79.112.106.45</ip>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="6520fd0d-a8aa-4220-a932-008e948e4726" approved="False">
+      <date>2012-02-06 22:50:36</date>
+      <author>lose weight easy</author>
+      <email>Galinski24850@gmail.com</email>
+      <country>us</country>
+      <ip>108.62.57.194</ip>
+      <website>http://bestwaytolooseweight.info/</website>
+      <content>You should take part in a contest for one of the best blogs on the web. I will recommend this post!</content>
+    </comment>
+    <comment id="5dccfec6-e00d-40b4-b2aa-ee50e8ee2e85" approved="False">
+      <date>2012-02-07 02:31:49</date>
+      <author>mini-pelle minipelle occasion minipelle</author>
+      <email />
+      <country>us</country>
+      <ip>217.128.106.230</ip>
+      <content>The best site for minipelle occasion</content>
+    </comment>
+    <comment id="068f4556-dc98-4161-bbc7-094b53cfd8e2" approved="False">
+      <date>2012-02-07 14:10:14</date>
+      <author>Dumpster Rentals Michigan</author>
+      <email>Curz3@gmail.com</email>
+      <country>us</country>
+      <ip>107.5.122.226</ip>
+      <website>http://www.synergy-env.com/residential/roll-off-dumpsters</website>
+      <content>Synergy provides unique solutions for residential customers. These include dumpsters for remodeling or construction projects, recycling, composting and collection containers. </content>
+    </comment>
+    <comment id="e1413bde-8306-455b-a7c4-10f274e7e15d" approved="False">
+      <date>2012-02-08 07:32:20</date>
+      <author>Laurie Portaro</author>
+      <email>Brandon_Uriostegui@yahoo.com</email>
+      <country>us</country>
+      <ip>202.127.1.88</ip>
+      <website>http://www.synergyxtr.com.au/2010/09/30/cloud-services…power-startups/</website>
+      <content>These are the reasons why these loans are very popular...</content>
+    </comment>
+    <comment id="34f601b4-c126-4d50-b1db-838a919e491a" approved="False">
+      <date>2012-02-08 21:19:26</date>
+      <author>Keywords Here</author>
+      <email />
+      <country>us</country>
+      <ip>142.177.103.70</ip>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="c1b1e76b-57e5-4017-be4a-8ac224813110" approved="False">
+      <date>2012-02-09 03:58:02</date>
+      <author>Bwadley Mahnning</author>
+      <email>jacbrauer@gmail.com</email>
+      <country>us</country>
+      <ip>109.132.179.41</ip>
+      <website>http://theeclecticautodidact.blogspot.com/</website>
+      <content>This site is awesome! Great, yet simple design and lots of reasons to come back a lot of times [lots of depth].
+
+Do you lot want to learn a language, a science, a skill or a lot of facts about a certain subject? Want to go to university and do something worthwhile? Then I have the PERFECT website to give you the push you need. theeclecticautodidact.blogspot.com/
+
+http://theeclecticautodidact.blogspot.com/</content>
+    </comment>
+    <comment id="3bedbdae-4446-4a22-91b8-f7a4530719d7" approved="False">
+      <date>2012-02-09 08:36:29</date>
+      <author>Zetta Bolevice</author>
+      <email>Ishak605@gmail.com</email>
+      <country>us</country>
+      <ip>178.162.184.13</ip>
+      <website>http://elanddirect.com/profile/lEBrantd</website>
+      <content>Cheers to get placing these types of, It?&amp;#161;&amp;#165;s simply what Once i was getting knowledgeable about to find aol. I?&amp;#161;&amp;#165;d lots somewhat purchase sentiments on the individual, a little bit as opposed to an institution page, that?&amp;#161;&amp;#165;s exactly why I favor weblogs so very much. Appreciate it!</content>
+    </comment>
+    <comment id="99bf5756-8d38-410a-883f-5f494b4a30af" approved="False">
+      <date>2012-02-09 14:04:25</date>
+      <author>english essays paper</author>
+      <email>vasilisacute@gmail.com</email>
+      <country>ca</country>
+      <ip>91.212.226.136</ip>
+      <website>http://www.manyessays.com/</website>
+      <content>If you like to a good academic grade, you should finish the great creative writing essay paper. The awesome essay seems to be a correct guide for custom essay papers completing, I do guess. </content>
+    </comment>
+    <comment id="be6284c2-738b-41fa-803b-893a277e1b00" approved="False">
+      <date>2012-02-10 13:34:33</date>
+      <author>Audiobooks, lectures, ebooks</author>
+      <email>jacbrauer@gmail.com</email>
+      <country>us</country>
+      <ip>109.132.166.82</ip>
+      <website>http://theeclecticautodidact.blogspot.com/</website>
+      <content>I've found a website where you can watch free lectures, read free ebooks and listen to free audiobooks.
+http://theeclecticautodidact.blogspot.com/</content>
+    </comment>
+    <comment id="f0efd54a-e551-4ab5-8dcd-d66f8c23fcad" approved="False">
+      <date>2012-02-10 19:56:07</date>
+      <author>business, business service</author>
+      <email>digirorain5@gmail.com</email>
+      <country>us</country>
+      <ip>114.79.52.53</ip>
+      <website>http://www.rianbiz.com/</website>
+      <content>We are offering several Services with Lowest Price for your product, website, company, personal, and business such as Video Testimonial ;  Facebook Like ; Google +1 ; Youtube View ; Twitter Follower ; Design Logo ; Design Poster / Flyer ; Design Banner ; Design Brochure / Leaflet ; Design Ebook Cover - CD Cover ; Design Stationery Including Letterhead, Business Card, &amp;amp; Envelope ; Video Intro ; Huge Email List ; Promoted Seo For Website.
+
+If you interested, please visit at www.rianbiz.com</content>
+    </comment>
+    <comment id="516b33fc-786d-4c76-818d-04ec48ea997b" approved="False">
+      <date>2012-02-11 03:48:49</date>
+      <author>small business ideas</author>
+      <email>Sosby9@gmail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://beaconllc.net/index.php/2012/02/5-reasons-your-company-needs-small-company-consulting/</website>
+      <content>I am glad for commenting to let you understand of the notable encounter my girl had reading the blog. She realized so many pieces, which included what it's like to have a wonderful coaching mindset to make other people easily know a number of problematic subject areas. You truly exceeded her expectations. Thank you for imparting these productive, healthy, edifying and easy tips about this topic to Mary.</content>
+    </comment>
+    <comment id="9af376fe-d020-4bd3-bbcd-90f656724fd4" approved="False">
+      <date>2012-02-11 10:58:36</date>
+      <author>SEO India </author>
+      <email>Rairdon19@yahoo.com</email>
+      <country>us</country>
+      <ip>64.186.134.111</ip>
+      <website>http://topseolinks.com/</website>
+      <content>Truly i'm impressed from this post....the person who create this publish it was a great human..thanks for shared this with us.</content>
+    </comment>
+    <comment id="340cd9e3-eee6-4857-9fea-5d0281df7eaf" approved="False">
+      <date>2012-02-11 11:11:08</date>
+      <author>Audiobooks Lectures Ebooks Documentaries</author>
+      <email>jacbrauer@gmail.com</email>
+      <country>us</country>
+      <ip>109.132.166.82</ip>
+      <website>http://theeclecticautodidact.blogspot.com/</website>
+      <content>http://theeclecticautodidact.blogspot.com
+Watch free lectures, audiobooks, ebooks, documentaries and shortfilms.
+Food for the mind.</content>
+    </comment>
+    <comment id="1f9a8c64-b339-4db2-89ca-1c43163dd2ac" approved="False">
+      <date>2012-02-11 16:34:59</date>
+      <author>Keywords Here</author>
+      <email />
+      <country>us</country>
+      <ip>95.89.90.181</ip>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="6e29f4d4-cd89-4e5b-9191-b3e074a8761d" approved="False">
+      <date>2012-02-11 18:40:24</date>
+      <author>Free college lectures, audiobooks, ebooks and documentaries</author>
+      <email>jacbrauer@gmail.com</email>
+      <country>us</country>
+      <ip>109.132.166.82</ip>
+      <website>http://theeclecticautodidact.blogspot.com/</website>
+      <content>http://theeclecticautodidact.blogspot.com/
+Free lectures, audiobooks, ebooks, documentaries, shortfilms, current events and much, much  more food for the mind.</content>
+    </comment>
+    <comment id="42d5b939-5680-4776-a611-748f5b3fd8a0" approved="False">
+      <date>2012-02-11 19:08:49</date>
+      <author>Elida Musgrove</author>
+      <email>Ureno724@gmail.com</email>
+      <country>us</country>
+      <ip>115.85.67.162</ip>
+      <website>http://www.reunies.info/pg/pages/view/1446/thrilled-to-deliver-one-thing-with-regards-to-hampton-bay-track-lighting-fixtures-you-actually-need-to-recognise</website>
+      <content>I appreciate you for this short article. Thats all I'll say. You almost certainly have made this website into something speciel. You clearly understand what your are performing, youve covered a lot of bases.Thanks</content>
+    </comment>
+    <comment id="9d1c21f3-367a-46dc-af4e-3367c632cfec" approved="False">
+      <date>2012-02-11 19:48:16</date>
+      <author>free ebooks lectures audiobooks documentaries</author>
+      <email>jacbrauer@gmail.com</email>
+      <country>us</country>
+      <ip>109.132.166.82</ip>
+      <website>http://theeclecticautodidact.blogspot.com/</website>
+      <content>Free ebooks, documentaries, audiobooks and university lectures on this website: http://theeclecticautodidact.blogspot.com/
+Food for the mind!</content>
+    </comment>
+    <comment id="8efa1398-9200-48db-b317-3af83d6fb645" approved="False">
+      <date>2012-02-12 01:25:49</date>
+      <author>service, graphic design, design service, business service, marketing service</author>
+      <email>digirorain5@gmail.com</email>
+      <country>us</country>
+      <ip>114.79.53.225</ip>
+      <website>http://www.rianbiz.com/</website>
+      <content>We are offering several Services with Lowest Price for your product, website, company, personal, and business such as Video Testimonial ;  Facebook Like ; Google +1 ; Youtube View ; Twitter Follower ; Design Logo ; Design Poster / Flyer ; Design Banner ; Design Brochure / Leaflet ; Design Ebook Cover - CD Cover ; Design Stationery Including Letterhead, Business Card, &amp;amp; Envelope ; Video Intro ; Huge Email List ; Promoted Seo For Website.
+
+If you interested, please visit at www.rianbiz.com</content>
+    </comment>
+    <comment id="b13f0c25-fa41-46b7-877b-72ba424ea090" approved="False">
+      <date>2012-02-12 02:07:52</date>
+      <author>yeast infection home remedy,best acne system,adult acne causes,all natural acne treatment,overnight acne cures</author>
+      <email>PaulWood5694@live.com</email>
+      <country>us</country>
+      <ip>79.112.125.148</ip>
+      <content>http://bestacnesystem.blogseu.com/. Best Acne System,best advice for you, and best recommendations made   by doctors dermatologists
+
+</content>
+    </comment>
+    <comment id="5b563767-d871-44e8-9e72-9d3a45ad8c67" approved="False">
+      <date>2012-02-12 19:54:08</date>
+      <author>Shavonda Bethurem</author>
+      <email>Shenna_Girmazion@hotmail.com</email>
+      <country>us</country>
+      <ip>173.234.181.197</ip>
+      <website>http://ultimatedemonstration.soup.io/post/229820277/Demon-In-The-Ultimate-Detail</website>
+      <content>WPML doesn't have a free version, but we do have a full-refunds policy. If you buy it and you're not happy, for whatever reason, we return your money immediately.</content>
+    </comment>
+    <comment id="33138bb9-3607-4b45-9190-cfda786f8bf4" approved="False">
+      <date>2012-02-12 23:35:44</date>
+      <author>Rosetta Stone Spanish</author>
+      <email>Pinnock@gmail.com</email>
+      <country>us</country>
+      <ip>72.52.108.203</ip>
+      <website>http://www.discount-rosetta-stone.net/</website>
+      <content>Just wanted to give you a shout from the valley of the sun, great information. Much appreciated.</content>
+    </comment>
+    <comment id="119264d4-dda2-437f-a6bf-8eeb5a618c22" approved="False">
+      <date>2012-02-13 21:09:48</date>
+      <author>team building activities</author>
+      <email>Wariner@ymail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://1736harpersferryroad.com/index.php/2012/02/a-couple-of-tips-about-how-to-perform-a-team-building-action/</website>
+      <content>I am only writing to make you understand of the really good discovery my daughter experienced reading through your site. She came to understand plenty of details, which included what it is like to possess a wonderful giving spirit to have others really easily know chosen very confusing topics. You undoubtedly exceeded her expected results. Thank you for offering the important, dependable, revealing and as well as fun tips about that topic to Jane.</content>
+    </comment>
+    <comment id="089762fa-755b-4f8a-91f1-a16773496a94" approved="False">
+      <date>2012-02-13 23:42:59</date>
+      <author>Rosetta Stone Spanish</author>
+      <email>Sepulvado@gmail.com</email>
+      <country>us</country>
+      <ip>72.52.108.203</ip>
+      <website>http://www.rosettastone-discount.net/</website>
+      <content>Thanks , I’ve recently been searching for information approximately this topic for a while and yours is the best I have found out till now. But, what concerning the conclusion? Are you positive concerning the supply?</content>
+    </comment>
+    <comment id="61e9bc26-c0ea-45aa-ae85-9780c1136ede" approved="False">
+      <date>2012-02-13 23:53:39</date>
+      <author>Earn money online</author>
+      <email />
+      <country>us</country>
+      <ip>180.178.166.234</ip>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="01089584-00b3-46ad-a385-62b66f23a818" approved="False">
+      <date>2012-02-14 03:55:55</date>
+      <author>wizualizacje wnętrz</author>
+      <email>Eurton@pluntico.pl</email>
+      <country>us</country>
+      <ip>202.169.54.110</ip>
+      <website>http://110th.waw.pl/wizualizacje-ciekawych-projektow-architektury</website>
+      <content>I have not checked in here for a while as I thought it was getting boring, but the last several posts are really great quality so I guess I’ll add you back to my daily bloglist. You deserve it my friend. :)</content>
+    </comment>
+    <comment id="55ce67ba-ceb0-4cab-84c1-9c32482c7b92" approved="False">
+      <date>2012-02-14 06:34:57</date>
+      <author>subject to definition</author>
+      <email>Steenhoven@aol.com</email>
+      <country>us</country>
+      <ip>85.112.95.23</ip>
+      <website>http://www.sold2.us/</website>
+      <content>*When I originally commented I clicked the -Notify me when new comments are added- checkbox and now each time a comment is added I get four emails with the same comment. Is there any way you can remove me from that service? Thanks!</content>
+    </comment>
+    <comment id="ab230abb-1d75-45b5-997d-e5c85f629ae4" approved="False">
+      <date>2012-02-14 19:16:33</date>
+      <author>Stefany Nauss</author>
+      <email>Haley_Dodridge@gmail.com</email>
+      <country>us</country>
+      <ip>217.132.107.160</ip>
+      <website>http://www.bestlaptop2011.net/</website>
+      <content>It hurts my hands just to watch this!</content>
+    </comment>
+    <comment id="cb62dddf-a115-48d7-98f3-ccb6b63cf21c" approved="False">
+      <date>2012-02-15 02:58:14</date>
+      <author>team building activities</author>
+      <email>Byod@ymail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://uwopsu.com/index.php/2012/02/action-for-better-conversation-team-building-events-actions/</website>
+      <content>Needed to draft you this little remark to say thank you yet again regarding the magnificent secrets you've documented on this site. It has been so wonderfully open-handed with you to convey easily all many of us could have offered for an ebook in order to make some profit on their own, precisely given that you might well have done it in the event you decided. Those things as well acted like the easy way to realize that the rest have similar interest just as mine to understand somewhat more in regard to this condition. I know there are several more fun sessions up front for folks who read carefully your site.</content>
+    </comment>
+    <comment id="4b96e13b-12fd-471f-81fd-b014870dabd6" approved="False">
+      <date>2012-02-15 05:26:15</date>
+      <author>hosted virtual server</author>
+      <email>Belles@atlanticmetro.net</email>
+      <country>us</country>
+      <ip>199.115.229.62</ip>
+      <website>http://kuk-bot.net/phpBB2/profile.php?mode=viewprofile&amp;u=544074</website>
+      <content>Brilliant subject , I really wish how to make my website this interesting !</content>
+    </comment>
+    <comment id="354e236c-ae5f-4b49-b8df-0af7710678b0" approved="False">
+      <date>2012-02-15 10:37:04</date>
+      <author>CSSHTML</author>
+      <email>loydwatts424@hotmail.com</email>
+      <country>us</country>
+      <ip>117.207.1.17</ip>
+      <website>http://www.csshtml.co/</website>
+      <content>Good – I should definitely pronounce, impressed with your website. I had no trouble navigating through all the tabs as well as related information ended up being truly easy to do to access. I recently found what I hoped for before you know it in the least. Quite unusual. Is likely to appreciate it for those who add forums or anything, site theme . a tones way for your client to communicate. Excellent task..
+Thanks  for the sensible critique. Me &amp;amp; my neighbor were just preparing to do some research on this. We got a grab a book from our local library but I think I learned more clear from this post. I am very glad to see such fantastic info being shared freely out there.</content>
+    </comment>
+    <comment id="8bfda42b-bfc6-4aa5-bd0d-6a454b943652" approved="False">
+      <date>2012-02-15 12:08:20</date>
+      <author>Emmitt Mainguy</author>
+      <email>Beverlee_Carrazco@hotmail.com</email>
+      <country>us</country>
+      <ip>173.213.93.212</ip>
+      <website>http://www.forumbacklinks.net/</website>
+      <content>Charice doesnt want to sing high notes simply because thats the order of her manager...shes no longer amateur now...shes nothing to prove now hayyyyy hina namanLike or Dislike: 4 1</content>
+    </comment>
+    <comment id="1bab6f49-28d0-4703-b666-eedefaca9e00" approved="False">
+      <date>2012-02-15 12:51:11</date>
+      <author>&amp;#255;&amp;#254;c</author>
+      <email>Fudacz@sezamjewellery.pl</email>
+      <country>us</country>
+      <ip>128.204.202.75</ip>
+      <website>http://bm-autoczesci.pl/</website>
+      <content>good nice thanks</content>
+    </comment>
+    <comment id="75b740dd-1482-44f9-aa07-548bf4ba4cf8" approved="False">
+      <date>2012-02-15 13:31:00</date>
+      <author>Double Glazing Banbury</author>
+      <email>Antonio_Sanchz@hotmail.com</email>
+      <country>us</country>
+      <ip>128.204.201.93</ip>
+      <website>http://www.doubleglazingbanbury.com/</website>
+      <content>Hi, I tried to use this on both a group and a fan page. The group worked. The fan page it doesn't seem to do anything. Did facebook block it somehow?&amp;lt;br /&amp;gt;Jeremy recently posted..Kaizen Energy 8-25-2010</content>
+    </comment>
+    <comment id="d14889f7-b650-4888-9cb1-923c92ec6dd9" approved="False">
+      <date>2012-02-15 17:40:40</date>
+      <author>human psychology</author>
+      <email>Macdonnell15@gmail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://geigerdoescannes.com/index.php/2012/02/facts-about-human-psychology-information-and-facts/</website>
+      <content>I enjoy you because of every one of your efforts on this site. My mother loves conducting internet research and it's really simple to grasp why. All of us hear all relating to the powerful method you create useful tricks on your website and as well as encourage participation from some others about this area then our girl is without question studying a great deal. Have fun with the rest of the year. You have been doing a first class job.</content>
+    </comment>
+    <comment id="01546885-4695-4f56-8a49-be50bfd243c1" approved="False">
+      <date>2012-02-15 21:40:55</date>
+      <author>cheap new era caps</author>
+      <email>Vondielingen@hotmail.com</email>
+      <country>us</country>
+      <ip>173.252.198.68</ip>
+      <website>http://www.wholesale-sexylingerie-costumes.com/</website>
+      <content>Can I just say what a relief to find someone who actually knows what theyre talking about on the internet. You definitely know how to bring an issue to light and make it important. More people need to read this and understand this side of the story. I cant believe youre not more popular because you definitely have the gift.</content>
+    </comment>
+    <comment id="e0f6c580-9964-44e0-ad95-08b096a0168c" approved="False">
+      <date>2012-02-15 23:27:46</date>
+      <author>Keywords Here</author>
+      <email>whichmagazine@gmail.com</email>
+      <country>us</country>
+      <ip>122.173.121.230</ip>
+      <website>http://www.whichmagazine.net/</website>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="49341785-58ba-4efc-a233-64e3d59d4dd8" approved="False">
+      <date>2012-02-16 01:33:32</date>
+      <author>Magento One Step Checkout</author>
+      <email>galengoodwin85@yahoo.co.uk</email>
+      <country>us</country>
+      <ip>59.90.161.8</ip>
+      <website>http://www.indieswebs.com/magento-extensions/magento-one-step-checkout.html</website>
+      <content>Thanks for the thoughts you share through your blog. In addition, quite a few young women exactly who become pregnant do not even seek to get medical insurance because they are full of fearfulness they won't qualify. Although a lot of states currently require  insurers give coverage no matter the pre-existing conditions. Charges on these kind of guaranteed plans are usually bigger, but when considering the high cost of health care bills it may be a new safer way to go to protect one's financial potential.</content>
+    </comment>
+    <comment id="7e11b165-bab7-4e8e-8aa4-7c7db2b0c0e2" approved="False">
+      <date>2012-02-16 16:30:58</date>
+      <author>leadership skill</author>
+      <email>Fulenwider@ymail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://thelincolnparkshow.com/index.php/2012/02/top-ten-executive-leadership-abilities/</website>
+      <content>I must express some thanks to you just for rescuing me from such a challenge. Right after surfing throughout the online world and meeting basics which are not productive, I believed my life was over. Being alive without the answers to the difficulties you have resolved through your blog post is a critical case, and the kind which could have in a negative way affected my entire career if I hadn't noticed your blog post. Your good natural talent and kindness in playing with everything was crucial. I don't know what I would have done if I hadn't encountered such a subject like this. It's possible to now look ahead to my future. Thanks for your time so much for the specialized and effective help. I will not think twice to propose the website to anyone who requires care on this issue.</content>
+    </comment>
+    <comment id="02e460b9-29ad-42df-b225-3a57bfcb37f4" approved="False">
+      <date>2012-02-16 17:19:33</date>
+      <author>webhosting,host free website,unlimited space,domain,make free website,cheap webhosting,Web Design,Website Designer,best free webhosting,make free website</author>
+      <email>hostmarch@gmail.com</email>
+      <country>us</country>
+      <ip>151.49.2.224</ip>
+      <website>http://www.hostmarch.com/</website>
+      <content>Comment here, Link is taken from homepage</content>
+    </comment>
+    <comment id="f4a973c9-0e0f-46f8-9980-b4073e9e6417" approved="False">
+      <date>2012-02-16 18:48:45</date>
+      <author>Colton</author>
+      <email>Max8881@gmail.com</email>
+      <country>us</country>
+      <ip>64.191.117.79</ip>
+      <website>http://saudibusiness.biz/</website>
+      <content>It seems that I became a fan of this site</content>
+    </comment>
+    <comment id="d96f7f42-a214-4a1f-97c6-4b413ef9262a" approved="False">
+      <date>2012-02-16 23:10:18</date>
+      <author>Burton Haynes</author>
+      <email>Parco5@gmail.com</email>
+      <country>us</country>
+      <ip>96.254.166.54</ip>
+      <website>http://www.countingmoneystacks.com/</website>
+      <content>I liked the layout of your site, looks pretty professional!</content>
+    </comment>
+    <comment id="833797a0-90ae-45d2-9cb4-024319032f63" approved="False">
+      <date>2012-02-16 23:32:19</date>
+      <author>employee motivation</author>
+      <email>Pangilinan@ymail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://crossthemes.org/index.php/2012/02/extendedterm-organizational-good-results-demands-worker-engagement/</website>
+      <content>I am also writing to let you understand of the cool discovery our girl had visiting your web page. She picked up a wide variety of issues, including how it is like to possess an excellent teaching mood to make the others completely comprehend specific very confusing subject matter. You actually surpassed our desires. Thank you for distributing those warm and helpful, trustworthy, revealing and in addition easy tips on that topic to Mary.</content>
+    </comment>
+    <comment id="6d2662ce-3f8e-4411-9123-cdb815ccfe2f" approved="False">
+      <date>2012-02-17 03:46:32</date>
+      <author>Swami Vivekananda</author>
+      <email>arturodavis112@yahoo.co.uk</email>
+      <country>us</country>
+      <ip>59.90.161.8</ip>
+      <content>Good post right here. One thing I would really like to say is the fact most professional job areas consider the Bachelor Degree like thejust like the entry level standard for an online certification. When Associate Certification are a great way to get started on, completing your own Bachelors starts up many doorways to various occupations, there are numerous online Bachelor Course Programs available through institutions like The University of Phoenix, Intercontinental University Online and Kaplan. Another issue is that many brick and mortar institutions offer you Online variants of their certifications but commonly for a greatly higher payment than the organizations that specialize in online qualification plans.</content>
+    </comment>
+    <comment id="22f4501a-4219-49c6-8b2e-5ccf142dc22b" approved="False">
+      <date>2012-02-17 12:47:05</date>
+      <author>uk chat rooms</author>
+      <email>Gelger@hotmail.com</email>
+      <country>us</country>
+      <ip>173.236.204.117</ip>
+      <website>http://zanaemy.livejournal.com/764.html</website>
+      <content>hi!,I like your writing very much! share we communicate more about your post on AOL? I require an expert on this area to solve my problem. May be that's you! Looking forward to see you.</content>
+    </comment>
+    <comment id="eafaf161-6ef0-46ec-a90a-028a8b4b2a8a" approved="False">
+      <date>2012-02-17 18:26:22</date>
+      <author>promotion strategy</author>
+      <email>Macdonnell15@gmail.com</email>
+      <country>us</country>
+      <ip>69.162.162.222</ip>
+      <website>http://schoolfurnitureshoppe.com/index.php/2012/02/site-promotion-strategies-basic-strategies-for-site-advertising/</website>
+      <content>I would like to show some appreciation to this writer for bailing me out of this issue. Because of checking throughout the world-wide-web and obtaining things which are not pleasant, I believed my life was well over. Being alive devoid of the approaches to the issues you have resolved by way of your posting is a serious case, and the ones which could have negatively affected my career if I hadn't encountered your web page. Your personal expertise and kindness in taking care of everything was tremendous. I'm not sure what I would've done if I hadn't come upon such a step like this. It's possible to at this moment look ahead to my future. Thank you so much for your expert and effective help. I won't be reluctant to refer your web blog to any individual who needs guidance about this topic.</content>
+    </comment>
+    <comment id="e5a886c0-37d6-4de0-8f95-066964bfed41" approved="False">
+      <date>2012-02-18 05:07:35</date>
+      <author>Granites, Granite Exporters, Granite Manufacturers, Granite Suppliers, Granites Madurai, Natural Stones, Granite Manufacturers Madurai, Granite Exporters Madurai, Granite Suppliers Madurai, Granite Tamilnadu, Granite Manufacturers, Granite Suppliers Exporters of Granite Tiles, Granite Slabs, Granite cut-to-sizes, Granite Countertops, Granite Vanity Tops, Granite Blocks, Madurai Granites, Tamilnadu Granites, Black galaxy, Absolute black, Ghibli, Gold, Paradiso, Asian Top, Tan brown, Raw silk, Kashmir white, Kashmir Gold, Cashmere white, White Granites Tiles, Black granite, Madura gold, Ivory fantasy,Ivory Brown, Red multicolor, Indian granite company, Madurai granite company, Granite Madurai, Granites Tamilnadu, Granites India</author>
+      <email />
+      <country>us</country>
+      <ip>122.174.171.5</ip>
+      <content>Jai Granites &amp;amp; Exports are Granite Suppliers, Exporters, Manufacturers in Madurai, India for Granite Tiles, Granite Slabs, Granite Vanity Tops, Granite Counter Tops. www.jaigranites.com</content>
+    </comment>
+    <comment id="496a242a-3d87-4784-b0fe-240e81c9e8aa" approved="False">
+      <date>2012-02-18 13:20:28</date>
+      <author>Long Tail Products - Achieve Your Business Dreams With Effective Search Engine Optimization</author>
+      <email>Lidia_Zuccaro@gmail.com</email>
+      <country>us</country>
+      <ip>173.208.18.185</ip>
+      <website>http://community.atom.com/Post/Long-Tail-Products--Achieve-Your-Business-Dreams-With-Effective-Search-Engine-Optimization/03EFBFFFF025619450008017EFB7C</website>
+      <content>You need to be aware that on a site/page which might get several thousand visitors/day and which is highly &amp;quot;optimized&amp;quot; for a keyword, say, &amp;quot;lose weight&amp;quot;...the main keyword might only amount to 30% of total traffic to the site...the majority of the incoming keywords are in fact long-tail keywords where each for itself literally has no statistical recorded search volume. But it's the sheer amount of long tail keywords which makes the 70% of the total site traffic. I observed this myself on a number of sites. And yes you are correct if you are saying that the main-stream keywords usually convert badly. &amp;quot;lose weight&amp;quot; and &amp;quot;lose weight fast&amp;quot; are actually very, very bad keywords..believe it or not. Worthless in terms of conversions.</content>
+    </comment>
+    <comment id="f47f94e0-0244-4e2b-90d0-2487eec20207" approved="False">
+      <date>2012-02-19 10:30:24</date>
+      <author>Google Reklam</author>
+      <email>Malet37@gmail.com</email>
+      <country>us</country>
+      <ip>173.234.130.172</ip>
+      <website>http://reklamology.com/</website>
+      <content>Well written and explains a lot. Thank you.</content>
+    </comment>
+    <comment id="29a85b29-cceb-44c5-bd91-d6804040fd47" approved="False">
+      <date>2012-02-19 12:53:54</date>
+      <author>pure jojoba oil</author>
+      <email>Moroni9151@hotmail.com</email>
+      <country>us</country>
+      <ip>178.216.50.151</ip>
+      <website>http://thejojobaoil.com/</website>
+      <content>Its like you read my mind! You seem to know so much about this, like you wrote the book in it or something. I think that you could do with some pics to drive the message home a bit, but instead of that, this is fantastic blog. A great read. I'll definitely be back. &amp;lt;a href=&amp;quot;http://thejojobaoil.com/&amp;quot;&amp;gt;jojoba oil&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="d0dee415-8c50-46a7-8c33-256c39137939" approved="False">
+      <date>2012-02-20 03:25:44</date>
+      <author>Lazaro Vogland</author>
+      <email>Longiotti451@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.42</ip>
+      <website>http://thehighfamily.net/pg/pages/view/3578/actually-fulfilled-to-notice-quite-a-few-data-concerning-hampton-bay-pendant-lighting-potential-buyers-have-got-to-have-an-understanding-of</website>
+      <content>I will be typically to blog we actually respect your content regularly. The article has actually peaks my interest. My goal is to bookmark your site and hold checking for brand new information.</content>
+    </comment>
+    <comment id="55beb87f-c0b1-4fb3-a558-37dc23a9f6ec" approved="False">
+      <date>2012-02-20 03:34:57</date>
+      <author>Tori Lige</author>
+      <email>Worland469@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.40</ip>
+      <website>http://natalbay.com/profile/tPGiless</website>
+      <content>Maintain operating ,perfect job!</content>
+    </comment>
+    <comment id="1b7243e2-96a9-4104-85ae-46e86518698c" approved="False">
+      <date>2012-02-20 03:41:37</date>
+      <author>Candace Summerville</author>
+      <email>Walsh957@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.39</ip>
+      <website>http://thehighfamily.net/pg/pages/view/3617/very-happy-to-give-one-thing-around-hampton-bay-track-lighting-fixtures-you-actually-need-to-be-aware-of</website>
+      <content>Which is really fascinating, You're an excessively professional blogger. I've got joined your feed and appear ahead to in quest of more within your great post. Also, I've shared your website during my social networking sites!</content>
+    </comment>
+    <comment id="008708fc-889b-47df-b743-499a472534e8" approved="False">
+      <date>2012-02-20 03:49:16</date>
+      <author>Woodrow Parisian</author>
+      <email>Paxman871@gmail.com</email>
+      <country>us</country>
+      <ip>204.236.182.201</ip>
+      <website>http://cbtis41.com/profile/kBenDund</website>
+      <content>This actually answered my downside, thank you!</content>
+    </comment>
+    <comment id="1ce06119-cbb1-45a8-b609-04263d5e524b" approved="False">
+      <date>2012-02-20 03:53:02</date>
+      <author>Jolie Shelpman</author>
+      <email>Pages301@gmail.com</email>
+      <country>us</country>
+      <ip>178.33.34.48</ip>
+      <website>http://elgg.friendoozle.com/pg/blog/owner/nPGilese</website>
+      <content>Great personal marvelous posting! I certainly enjoyed reading it, you're great author.I'm going to make sure I bookmark your web site and will return later. I want to encourage you to ultimately continue your congrats, have a very nice morning!</content>
+    </comment>
+    <comment id="3771f4fd-3b1c-4eb5-9da9-b838eb69819a" approved="False">
+      <date>2012-02-20 04:01:25</date>
+      <author>Bennie Kindermann</author>
+      <email>Freehoffer347@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.38</ip>
+      <website>http://natalbay.com/profile/tBenDunw</website>
+      <content>whoah this website is great i really like studying your site content. Stay up the great work! You know, many persons are looking round just for this information, you could possibly help them greatly.</content>
+    </comment>
+    <comment id="39daf234-cb6b-4a38-add8-1ec40dbed6b4" approved="False">
+      <date>2012-02-20 06:26:23</date>
+      <author>Chan Wedderspoon</author>
+      <email>Shivley6@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.42</ip>
+      <website>http://inlocaltv.com/profile/ePGilest</website>
+      <content>That's the proper blog for anyone who would like to search out out in regards to this topic. You find a great deal its almost tough to argue on hand (not really that I truly would want?-HaHa). You positively put a fresh spin on the topic thats been written about for several years. Great stuff, just great!</content>
+    </comment>
+    <comment id="c9084c1f-3f70-431b-8b3d-b9c6fbc1feec" approved="False">
+      <date>2012-02-20 06:35:49</date>
+      <author>Carl Reeder</author>
+      <email>Cookson299@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.40</ip>
+      <website>http://www.designedifice.net/blog/view/1332/opinion-of-making-a-choice-with-hampton-bay-typical-variety-openair-lightal-that-is-definitely-needed-to-nearly-everybody</website>
+      <content>Its pretty cool what blogging can perform. Connect you with all others. </content>
+    </comment>
+    <comment id="d8eb2447-91f4-4b83-8ac0-24f24ed08fe3" approved="False">
+      <date>2012-02-20 06:43:05</date>
+      <author>Luigi Borzillo</author>
+      <email>Torian673@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.39</ip>
+      <website>http://www.selfshothunts.com/profile/nPGilest</website>
+      <content>I have to study creative writing while attending school. Like to be a novelist or even screenplays. It doesnt really matter while long as its an english speaking country. Anybody have any ideas of where would be better?. </content>
+    </comment>
+    <comment id="efad2508-658d-495f-97f5-6950a95f4b91" approved="False">
+      <date>2012-02-20 06:44:36</date>
+      <author>Kaleigh Dolecki</author>
+      <email>Hencheck649@gmail.com</email>
+      <country>us</country>
+      <ip>212.118.244.162</ip>
+      <website>http://www.campusdosti.com/profile/eBenDunk</website>
+      <content>I stumbled upon your blog post web-site on the search engines and verify a few of your early posts. Always maintain inside the superb operate. I recently extra increase your Rss to my MSN Information Reader. Hunting for ahead to reading more of your stuff shortly!?-</content>
+    </comment>
+    <comment id="9fd1cdeb-adb3-4d25-b5d0-27bebb0f7522" approved="False">
+      <date>2012-02-20 06:47:21</date>
+      <author>Bennett Bures</author>
+      <email>Flam971@gmail.com</email>
+      <country>us</country>
+      <ip>212.118.244.162</ip>
+      <website>http://www.motografer.com/profile/eBenDuno</website>
+      <content>When I learn a weblog, Lets hope it doesnt disappoint me to be a lot simply because this one. I imply, I understand it turned out my approach to read, however I must say i thought youd have something attention-grabbing to state. All I hear is often a number of whining about a very important factor that you may fix just in case you werent too busy trying to find attention.</content>
+    </comment>
+    <comment id="1244d631-87f9-4877-a558-f8ac5fe9cc88" approved="False">
+      <date>2012-02-20 06:54:30</date>
+      <author>Florencio Scattergood</author>
+      <email>Ronquillo960@gmail.com</email>
+      <country>us</country>
+      <ip>178.33.34.48</ip>
+      <website>http://egocode.net/pg/pages/view/62/</website>
+      <content>Hmm it looks like your website ate my first comment (it had been extremely long) so I guess I'll just conclude the things i wrote and say, I'm thoroughly enjoying your blog site. I too am a future blog writer but I'm still new at all to the whole lot. Do you have any thoughts for inexperienced blog writers? I'd certainly enjoy it.</content>
+    </comment>
+    <comment id="1c9325a4-f44f-4e95-89a2-b2acb80fcee9" approved="False">
+      <date>2012-02-20 06:58:27</date>
+      <author>Percy Sobieraj</author>
+      <email>Dedaj584@gmail.com</email>
+      <country>us</country>
+      <ip>190.111.26.58</ip>
+      <website>http://wereact.com/profile/vEBrantw</website>
+      <content>Interesting article. Were do you got all the info from.</content>
+    </comment>
+    <comment id="1e11c8ed-8439-425a-905a-f0a84b20d09b" approved="False">
+      <date>2012-02-20 06:58:57</date>
+      <author>Efren Harbolt</author>
+      <email>Reichard132@gmail.com</email>
+      <country>us</country>
+      <ip>186.251.180.6</ip>
+      <website>http://gameappdev.com/profile/sPGilese</website>
+      <content>I would like to study creative writing attending school. Like for example to turn into a novelist or it could be screenplays. It doesnt really matter where as long because its an english speaking country. Anybody have any ideas of where would be better?. </content>
+    </comment>
+    <comment id="f2c3718e-821f-47b8-987e-2d313501a970" approved="False">
+      <date>2012-02-20 07:00:43</date>
+      <author>Ardelle Lovas</author>
+      <email>Dorcelus895@gmail.com</email>
+      <country>us</country>
+      <ip>190.17.233.44</ip>
+      <website>http://gamerstags.com/pg/blog/owner/tPGilesg</website>
+      <content>Would you like to guys stick to target please. You're makin me dizzy tryin to adhere to this tread.</content>
+    </comment>
+    <comment id="76a5fb2e-087e-4539-831d-c37d9f832055" approved="False">
+      <date>2012-02-20 07:01:35</date>
+      <author>Raymon Brinegar</author>
+      <email>Genas774@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.38</ip>
+      <website>http://alstindo.com/pg/blog/owner/lEBrantn</website>
+      <content>Magnificent goods from you, man. All over the world - Survive + Thrive  Boston I've understand your stuff ahead of and you're simply just extremely wonderful. I personally like what you've acquired here, certainly like what you really are stating and exactly how where you say it. You're making it entertaining and you still deal with to prevent it wise. I am unable to wait to see a lot more by you. This is really an amazing Globally - Survive + Thrive  Boston informations.</content>
+    </comment>
+    <comment id="5aa9b6c3-2045-4bbb-b103-bf5b9bc87398" approved="False">
+      <date>2012-02-20 13:04:38</date>
+      <author>adult chat rooms</author>
+      <email>Bidon@hotmail.com</email>
+      <country>us</country>
+      <ip>201.231.19.28</ip>
+      <website>http://freechatroomsonline.blogspot.com/</website>
+      <content>I really appreciate this post. I have been looking everywhere for this! Thank goodness I found it on Bing. You have made my day! Thank you again</content>
+    </comment>
+    <comment id="5c354597-ae76-4a6a-9bbd-a994ddaafad2" approved="False">
+      <date>2012-02-20 19:49:32</date>
+      <author>Sexy Halloween Costumes</author>
+      <email>Freshwater@hotmail.com</email>
+      <country>us</country>
+      <ip>173.252.198.68</ip>
+      <website>http://www.wholesale-sexylingerie-costumes.com/</website>
+      <content>The next time I read a blog, I hope that it doesnt disappoint me as much as this one. I mean, I know it was my choice to read, but I actually thought youd have something interesting to say. All I hear is a bunch of whining about something that you could fix if you werent too busy looking for attention.</content>
+    </comment>
+    <comment id="57abdf4a-d6d5-40a4-849f-15116763a167" approved="False">
+      <date>2012-02-21 04:04:58</date>
+      <author>adult chat rooms</author>
+      <email>Zirbel@hotmail.com</email>
+      <country>us</country>
+      <ip>202.169.54.110</ip>
+      <website>http://www.usachatrooms.us/</website>
+      <content>Nice site &amp;amp; written work.</content>
+    </comment>
+    <comment id="5d2e17b7-c5e8-4563-9375-ebb86248243f" approved="False">
+      <date>2012-02-21 12:24:52</date>
+      <author>Google Reklam</author>
+      <email>Harpe663@gmail.com</email>
+      <country>us</country>
+      <ip>173.234.138.242</ip>
+      <website>http://reklamology.com/</website>
+      <content>Great article. Adding to my favorites now!</content>
+    </comment>
+    <comment id="0979daad-7812-45c6-ac79-4fe5570390ec" approved="False">
+      <date>2012-02-21 16:02:34</date>
+      <author>suricloud</author>
+      <email>techarena247@gmail.com</email>
+      <country>us</country>
+      <ip>190.98.64.236</ip>
+      <website>http://www.suricloud.net/</website>
+      <content>Hello,
+
+we are providing free web hosting
+
+Sign up today to start your own website
+
+http://www.suricloud.net</content>
+    </comment>
+    <comment id="9b235f04-574c-4dbe-98cb-4a75ab7ab46d" approved="False">
+      <date>2012-02-21 22:09:30</date>
+      <author>Cooper</author>
+      <email>Cole6789@hotmail.com</email>
+      <country>us</country>
+      <ip>50.115.164.246</ip>
+      <website>http://saudibusiness.biz/</website>
+      <content>Always look for the serious and articles I find in this beautiful site</content>
+    </comment>
+    <comment id="e7f397d3-5083-4537-a357-97817def8382" approved="False">
+      <date>2012-02-22 02:46:46</date>
+      <author>mexican soccer jerseys in san antonio texas</author>
+      <email>Janeway@hotmail.com</email>
+      <country>us</country>
+      <ip>173.252.198.68</ip>
+      <website>http://mexican-soccer-jerseys-in-san-antonio-texas.freeblog.hu/</website>
+      <content>Your place is valueble for me. Thanks!…This web site is really a walk-through for all of the info you wanted about this and didn’t know who to ask. Glimpse here, and you’ll definitely discover it.</content>
+    </comment>
+    <comment id="c6bc8480-1a62-4aca-a2f4-77418f468029" approved="False">
+      <date>2012-02-22 03:55:13</date>
+      <author>chicago remodeling</author>
+      <email>Tredinnick@aol.com</email>
+      <country>us</country>
+      <ip>31.210.121.193</ip>
+      <website>http://www.openobject.com/wiki/index.php?title=User:georgewells</website>
+      <content>Thanks a lot for giving everyone an extraordinarily superb possiblity to read from this web site. It is usually very amazing and jam-packed with a great time for me and my office mates to search your blog more than three times in a week to find out the fresh stuff you have. And lastly, I'm just certainly happy with all the splendid guidelines you give. Certain 1 tips on this page are surely the most effective we have all ever had.</content>
+    </comment>
+    <comment id="b1c6a158-68ae-48e2-9d48-e03356705e46" approved="False">
+      <date>2012-02-22 07:59:20</date>
+      <author>Sex Demotywatory</author>
+      <email>Harville40002@yahoo.com</email>
+      <country>us</country>
+      <ip>83.2.128.6</ip>
+      <website>http://www.sexmonster.org/</website>
+      <content>Naprawdę trudno jest mnie tak zaskoczyć a jednak hmm udało się :) Wszystkiego dobrego dla prowadzącego. Oliwia z www.sexmonster.org</content>
+    </comment>
+    <comment id="4a0a5015-5fca-41e3-85af-a2f4f72e2052" approved="False">
+      <date>2012-02-22 12:10:47</date>
+      <author>Elaine Godek</author>
+      <email>Katy_Melecio@gmail.com</email>
+      <country>us</country>
+      <ip>173.234.207.159</ip>
+      <website>http://www.hotels-booking.com/</website>
+      <content>I had a couple of friends with 92 and 94 Mazda Protege's that reached 245,000 and 215,000 miles before they sold them. They sold them because of growing families, not because they had problems.</content>
+    </comment>
+    <comment id="4cb76869-88e4-4e28-816e-6206f273aeca" approved="False">
+      <date>2012-02-22 12:56:09</date>
+      <author>strona</author>
+      <email>Konyn@aol.com</email>
+      <country>us</country>
+      <ip>68.168.132.88</ip>
+      <website>http://xn--lubi-biznes-urb.pl/</website>
+      <content>As a Newbie, I am permanently searching online for articles that can be of assistance to me. Thank you </content>
+    </comment>
+    <comment id="04b53c77-05dc-4d23-bcf9-a75dd2cf9fa3" approved="False">
+      <date>2012-02-22 15:41:04</date>
+      <author>Google Reklam</author>
+      <email>Haggermaker92@gmail.com</email>
+      <country>us</country>
+      <ip>173.234.238.221</ip>
+      <website>http://reklamology.com/</website>
+      <content>Great article. Adding to my favorites now!</content>
+    </comment>
+    <comment id="7cad4aa7-728d-42e1-b66c-0d8c2baa834e" approved="False">
+      <date>2012-02-22 20:39:56</date>
+      <author>hampton bay bath lighting</author>
+      <email>Raffone582@gmail.com</email>
+      <country>us</country>
+      <ip>177.39.208.16</ip>
+      <website>http://www.ziki.com/en/tvadahudsonl+663791/post/thankful-to-remember-some-thing-about-hampton-bay-lighting-fixtures-you-must-real+13479522</website>
+      <content>We have to mention that for that last very few of hrs we have been hooked from the remarkable posts on this blog website. Always keep up the terrific function.</content>
+    </comment>
+    <comment id="c716f41d-96de-4c2e-8187-6718e86ecd93" approved="False">
+      <date>2012-02-22 20:47:48</date>
+      <author>hampton bay fluorescent lighting</author>
+      <email>Cernoch51@gmail.com</email>
+      <country>us</country>
+      <ip>177.39.208.16</ip>
+      <website>http://wallinside.com/post-375711.html</website>
+      <content>Wonderful submit, pretty useful, thanks for sharing!</content>
+    </comment>
+    <comment id="620d7193-4c59-4f2c-9bea-e2e9f49caade" approved="False">
+      <date>2012-02-22 21:02:27</date>
+      <author>hampton bay pendant light</author>
+      <email>Elmendorf909@gmail.com</email>
+      <country>us</country>
+      <ip>177.39.208.16</ip>
+      <website>http://wallinside.com/post-375711.html</website>
+      <content>Really great publish. I just stumbled upon your site and wished to state that We have truly appreciated reading through your web site posts. Any way I?&amp;#175;ll be subscribing for your feed and I hope you publish again quickly.</content>
+    </comment>
+    <comment id="2eaae794-8504-4b06-a5e7-7295b8ba6f2f" approved="False">
+      <date>2012-02-22 21:22:26</date>
+      <author>hampton bay outdoor wall light</author>
+      <email>Eilbeck535@gmail.com</email>
+      <country>us</country>
+      <ip>177.39.208.16</ip>
+      <website>http://hamptonbaylightjust4home521.qapacity.com.qapacity.com/my-blog/193203/about-hampton-bay-lighting-many-of-us-really-like-19/</website>
+      <content>Very good ideas you've got there, hope I could probably use only a component of that in the course of my routine.</content>
+    </comment>
+    <comment id="184f2506-784a-4281-8f28-5ff79055e619" approved="False">
+      <date>2012-02-22 23:54:56</date>
+      <author>Luci Kinkaid</author>
+      <email>Marc_Goettel@yahoo.com</email>
+      <country>us</country>
+      <ip>218.22.80.61</ip>
+      <website>http://www.mediafileshare.com/video/2100</website>
+      <content>The difficulties you meet will resolve themselves as you advance. Proceed, and light will dawn, and shine with increasing clearness on your path. Jim Rohn </content>
+    </comment>
+    <comment id="2e3ca14b-9dad-40b9-a56f-336481b511fc" approved="False">
+      <date>2012-02-23 06:16:08</date>
+      <author>wonder file reviews</author>
+      <email>Alapai@aol.com</email>
+      <country>us</country>
+      <ip>108.62.172.215</ip>
+      <website>http://www.wonderfilereviewsx.com/</website>
+      <content>Previously mentioned the rest We enjoy producing room pertaining to choices, even though these aren't perfectly personalized in your mindset and also motion.</content>
+    </comment>
+    <comment id="371e7538-588a-422a-865d-b9e01c2f42b0" approved="False">
+      <date>2012-02-23 16:59:37</date>
+      <author>Leon E. Pearson</author>
+      <email>aoi2108@hotmail.com</email>
+      <country>us</country>
+      <ip>173.208.61.139</ip>
+      <website>http://sharedw.org/</website>
+      <content>Thank you very much for the nice post.</content>
+    </comment>
+    <comment id="ff303943-d5fb-482c-aae5-32680f6c4413" approved="False">
+      <date>2012-02-23 21:55:13</date>
+      <author>hampton bay pendant light</author>
+      <email>Kammerer113@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.39</ip>
+      <website>http://mohasfdhvvvslll2.bravejournal.com/entry/78161</website>
+      <content>Many thanks for a wonderful publish and attention-grabbing comments. I discovered this submit though browsing for some song lyrics. Many thanks for sharing this submit.</content>
+    </comment>
+    <comment id="9540ad5e-843b-4b3f-94aa-4e89ff8f19d5" approved="False">
+      <date>2012-02-23 22:15:17</date>
+      <author>hampton bay led lights</author>
+      <email>Giardina375@gmail.com</email>
+      <country>us</country>
+      <ip>178.63.120.39</ip>
+      <website>http://www.blackplanet.com/your_page/blog/view_posting.html?pid=825991&amp;profile_id=59051914&amp;profile_name=normaasdwwioeiie&amp;user_id=59051914&amp;username=normaasdwwioeiie</website>
+      <content>Significantly, the article is in point of fact the best on this deserving topic. I concur together with your conclusions and will eagerly seem forward for your foreseeable future updates. Saying thank you will not likely just be adequate, for the fantastic clarity inside your writing. I'll straight away get your rss feed to remain abreast of any updates. Enjoyable do the job and a whole lot accomplishment in your enterprise dealings!</content>
+    </comment>
+    <comment id="2d5f4247-ed23-44a1-9929-1705347ffd3f" approved="False">
+      <date>2012-02-24 12:58:18</date>
+      <author>web hosting services reviews</author>
+      <email>Stephine_Cormier@gmail.com</email>
+      <country>us</country>
+      <ip>79.172.242.248</ip>
+      <website>http://www.hostbyweb.com/</website>
+      <content>I've used 1&amp;amp;1 since 2005 and have not had any major problems.</content>
+    </comment>
+    <comment id="38add276-2488-4355-9d29-f8d7e5cdf8c5" approved="False">
+      <date>2012-02-25 09:11:36</date>
+      <author>free wii points</author>
+      <email>Mcfetridge6669@gmail.com</email>
+      <country>us</country>
+      <ip>208.100.18.132</ip>
+      <website>http://www.prepaidcellfree.com/vouchers.php</website>
+      <content>I seriously liked piece of article, great job. I believe I am going to be frequent here more of the time to check out there are any new posts!</content>
+    </comment>
+    <comment id="59db4deb-dfbf-42b0-a357-598419a91fba" approved="False">
+      <date>2012-02-25 11:42:06</date>
+      <author>Phyliss Novi</author>
+      <email>Perring@gmail.com</email>
+      <country>us</country>
+      <ip>98.142.212.200</ip>
+      <website>http://mastersofmedia.hum.uva.nl/author/erik</website>
+      <content>Your website doesn't display properly on my i phone  you might want to try and fix that</content>
+    </comment>
+    <comment id="7a166e6d-7865-430d-8f1a-c0d2e28c3500" approved="False">
+      <date>2012-02-25 13:53:16</date>
+      <author>hampton bay flush mount lighting</author>
+      <email>Reine621@gmail.com</email>
+      <country>us</country>
+      <ip>189.80.45.66</ip>
+      <website>http://www.blackplanet.com/your_page/blog/view_posting.html?pid=755077&amp;profile_id=59052038&amp;profile_name=mohasfdhvvvslll2&amp;user_id=59052038&amp;username=mohasfdhvvvslll2</website>
+      <content>I used to be just shopping for this information for a while. Right after 6 hours of ongoing Googleing, at last I obtained it within your online internet site. I speculate what's the Google's dilemma that does not rank this type of educational online sites closer towards the top. Ordinarily the very best websites are brimming with garbage.</content>
+    </comment>
+    <comment id="95c0cd1f-acec-4155-9be3-0039eb38a54d" approved="False">
+      <date>2012-02-25 13:57:18</date>
+      <author>Jojoba oil for Hair</author>
+      <email>Fobes1773@hotmail.com</email>
+      <country>us</country>
+      <ip>178.216.50.169</ip>
+      <website>http://thejojobaoil.com/</website>
+      <content>The next time I read a blog, I hope that it doesnt disappoint me as a lot as this one. I mean, I do know it was my choice to learn, but I actually thought youd have one thing interesting to say. All I hear is a bunch of whining about one thing that you might fix if you werent too busy in search of attention. &amp;lt;a href=&amp;quot;http://thejojobaoil.com/&amp;quot;&amp;gt;jojoba oil benefits&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="b52f799b-18ce-4522-bd99-1fdaeba47c5a" approved="False">
+      <date>2012-02-25 17:44:27</date>
+      <author>Cameron Eischen</author>
+      <email>Shaban@edunk.com</email>
+      <country>us</country>
+      <ip>122.224.143.187</ip>
+      <website>http://www.vvmmvv.waw.pl/</website>
+      <content>I'd need to test with you here. Which is not one thing I usually do! I get pleasure from reading a put up that can make folks think. Also, thanks for allowing me to comment!</content>
+    </comment>
+    <comment id="44c04740-faa4-424e-aaf1-e48d329f128b" approved="False">
+      <date>2012-02-25 17:57:29</date>
+      <author>hampton bay bath lighting</author>
+      <email>Waud516@gmail.com</email>
+      <country>us</country>
+      <ip>189.80.45.66</ip>
+      <website>http://en.netlog.com/hernandezmohammed/blog/blogid=5084762</website>
+      <content>Pretty good publish. I just stumbled on your blog page and needed to mention that We have actually enjoyed looking at your web site posts. Any way I?&amp;#175;ll be subscribing to your feed and I hope you submit once more shortly.</content>
+    </comment>
+    <comment id="60f3eb5f-a4f9-4b6d-bc4f-5adda3948de0" approved="False">
+      <date>2012-02-25 19:37:56</date>
+      <author>computer monitoring</author>
+      <email>Leora_Elgert@gmail.com</email>
+      <country>us</country>
+      <ip>118.172.38.226</ip>
+      <website>http://www.employee-monitor.net/monitor/computer-monitoring/</website>
+      <content>I agree. I have been doing the codecademy lessons for a couple of weeks and they are good, but when you get stuck, it is definitely hard to figure out what is wrong. I am currently on the Fizz Buzz lesson and am having problems.&amp;lt;br /&amp;gt;Also, I learned to program in high school on QBasic, so I have some idea on how stuff works, but it is has been awhile and I get frustrated fast.&amp;lt;br /&amp;gt;Is that normal for a new programmer, just sit and stare and try to figure out what went wrong?</content>
+    </comment>
+    <comment id="559ae886-c2a2-492e-8398-c0f5cd509a3b" approved="False">
+      <date>2012-02-25 22:58:54</date>
+      <author>organic jojoba oil</author>
+      <email>Binetti1793@hotmail.com</email>
+      <country>us</country>
+      <ip>108.62.32.199</ip>
+      <website>http://thejojobaoil.com/</website>
+      <content>stop&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;worldvillage.com/do-you-want-to-stop-snoring-check-out-this-device6276&amp;quot;&amp;gt;stop snoring products &amp;lt;a href=&amp;quot;http://thejojobaoil.com/&amp;quot;&amp;gt;jojoba oil benefits&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="334815dc-3728-4e3d-9db8-2cb90e7e1f3c" approved="False">
+      <date>2012-02-26 05:42:23</date>
+      <author>DEBORA Laurence</author>
+      <email>portail2000@aol.fr</email>
+      <country>us</country>
+      <ip>109.9.52.247</ip>
+      <website>http://www.web-assistance-france.com/</website>
+      <content>Le site Web-assistance-france.com est un forum d'entraide et d'assistance informatique .</content>
+    </comment>
+    <comment id="aaa77f98-9a90-4a8d-bc65-9562daaa8f04" approved="False">
+      <date>2012-02-26 06:02:27</date>
+      <author>hampton bay fluorescent lighting</author>
+      <email>Tinkler221@gmail.com</email>
+      <country>us</country>
+      <ip>189.80.45.66</ip>
+      <website>http://www.asianave.com/your_page/blog/view_posting.html?pid=5739638&amp;profile_id=45556580&amp;profile_name=normasliiiioao1&amp;user_id=45556580&amp;username=normasliiiioao1</website>
+      <content>It is really that time belonging to the yr when we celebrate life, appearance back at past error and solve in making the long run superior. I want you all late Merry xmas including a highly affluent new 12 months.</content>
+    </comment>
+    <comment id="28ced9b3-3c39-4483-b9cd-ff2a6055e32e" approved="False">
+      <date>2012-02-26 06:13:31</date>
+      <author>hampton bay track lighting</author>
+      <email>Brendlinger234@gmail.com</email>
+      <country>us</country>
+      <ip>189.80.45.66</ip>
+      <website>http://www.nexopia.com/users/wKazukoBarrc/blog</website>
+      <content>Howdy, i read your blog website sometimes and i very own a similar one particular and i was just thinking about should you get yourself a whole lot of spam comments? If so how do you prevent it, any plugin or everything you can actually suggest? I get a lot recently it is really driving me mad so any guidance is rather significantly appreciated. </content>
+    </comment>
+    <comment id="ed00fca6-3c71-498e-bbe5-5bf5f3494d51" approved="False">
+      <date>2012-02-26 08:22:31</date>
+      <author>hampton bay light</author>
+      <email>Caddle934@gmail.com</email>
+      <country>us</country>
+      <ip>189.80.45.66</ip>
+      <website>http://www.nexopia.com/users/tVadaHudsond/blog</website>
+      <content>Easily, the blogging site publish is actually the sweetest on this useful issue. I concur using your conclusions and will eagerly appearance forward to your incoming updates. Saying thanks will not just be sufficient, to the outstanding lucidity as part of your crafting. I will right now seize your rss feed to remain abreast of any updates. Dependable give good results and substantially good results with your online business endeavors! Sincerely, Jackson..</content>
+    </comment>
+    <comment id="ca28091c-4810-4f43-be53-661cb9a9a2c3" approved="False">
+      <date>2012-02-26 11:51:37</date>
+      <author>العاب جديدة</author>
+      <email>Bernard@hotmail.com</email>
+      <country>us</country>
+      <ip>174.140.174.124</ip>
+      <website>http://saudibusiness.biz/</website>
+      <content>I will try to return later to Complete the rest of the beautiful article .. Thank you for the management of the site</content>
+    </comment>
+    <comment id="63edc6b7-a3ac-4e73-b9db-cda35242d6e5" approved="False">
+      <date>2012-02-26 19:49:38</date>
+      <author>hampton bay island lighting</author>
+      <email>Wodskow891@gmail.com</email>
+      <country>us</country>
+      <ip>173.198.228.26</ip>
+      <website>http://bertmiraadee18.insanejournal.com/454.html</website>
+      <content>Superior ideas you may have there, hope I could probably apply only a component of that through my program.</content>
+    </comment>
+    <comment id="6f9e71bf-cf63-4882-8dc2-08ee42b143a1" approved="False">
+      <date>2012-02-26 20:01:19</date>
+      <author>hampton bay outdoor wall light</author>
+      <email>Vormelker69@gmail.com</email>
+      <country>us</country>
+      <ip>173.198.228.26</ip>
+      <website>http://mohaadswwee2.insanejournal.com/1223.html</website>
+      <content>We appreciate you your blog site. Thats all I'm in a position to say. You most positively have formulated this site into a little something thats eye gap and crucial. You obviously grasp most concerning the topic, youve lined lots of bases. great stuff from this a part of on the net. Again, thanks your weblog.</content>
+    </comment>
+    <comment id="ac225dfa-8e54-4d30-80da-29b0b4914a21" approved="False">
+      <date>2012-02-26 20:20:42</date>
+      <author>hampton bay lamps</author>
+      <email>Taybron520@gmail.com</email>
+      <country>us</country>
+      <ip>173.198.228.26</ip>
+      <website>http://myanimelist.net/blog.php?eid=655729</website>
+      <content>If I could say just one issue about this blogging site it may be design and style!  I imply, I was so distracted by the clashing colors that it had been pointless to try out to study the blog page.  Exactly what are making an attempt to do listed here just?  No-one can learn this is certainly if it seems like a kid smashed a box of Crayola with your web page!  Be sure to do anything about this.</content>
+    </comment>
+    <comment id="42bb5f78-c48d-4571-9f1d-338f98c0ccde" approved="False">
+      <date>2012-02-27 07:46:48</date>
+      <author>Kallie Cuccia</author>
+      <email>Mayeshiba6886@hotmail.com</email>
+      <country>us</country>
+      <ip>174.137.149.228</ip>
+      <website>http://construction-material.ca/blog/</website>
+      <content>Can I just say what a relief to find someone who actually knows what theyre talking about on the internet. You definitely know how to bring an issue to light and make it important. More people need to read this and understand this side of the story. I cant believe youre not more popular because you definitely have the gift.  Also, if you are interested in really neet Construction Materials site: &amp;lt;a href=&amp;quot;http://construction-material.ca&amp;quot;&amp;gt;Construction Material
+&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;</content>
+    </comment>
+  </comments>
+  <categories />
+  <notifications />
+</post>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>Fun with ViewState</title>
+  <description />
+  <content>&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+I read Dave Reed&amp;#39;sblog posting on &amp;quot;Truly Understanding ViewState&amp;quot;:
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&lt;a href="http://weblogs.asp.net/infinitiesloop/archive/2006/08/03/Truly-Understanding-Viewstate.aspx"&gt;http://weblogs.asp.net/infinitiesloop/archive/2006/08/03/Truly-Understanding-Viewstate.aspx&lt;/a&gt;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+I can&amp;#39;t say I didn&amp;#39;t not dis-believe what he said, after all he DOES work for Microsoft.&lt;span&gt;&amp;nbsp; &lt;/span&gt;But I wanted to see examples of when &lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;ViewState&lt;/a&gt;tracking took action and when it did not.&lt;span&gt;&amp;nbsp;&lt;/span&gt;If you want an in-depth understanding, read his post.&lt;span&gt;&amp;nbsp; &lt;/span&gt;But below is what I think is the most important point I take from his post that is vital to understanding &lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;ViewState&lt;/a&gt;,thereby understanding how to best lighten the load of your post-backs, thereby optimizing the performance of your web application.
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&lt;span style="text-decoration: underline"&gt;The biggest misconception about ViewState:&lt;/span&gt;
+&lt;/p&gt;
+&lt;ul style="margin-left: 0.375in; direction: ltr; unicode-bidi: embed; margin-top: 0in; margin-bottom: 0in"&gt;
+	&lt;li style="margin-top: 0px; margin-bottom: 0px; vertical-align: middle"&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; (or more specifically &lt;/span&gt;&lt;span style="font-style: italic; font-family: Calibri; font-size: 11pt"&gt;ViewState	tracking&lt;/span&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;) is	simply how all ASP.NET Web Controls maintain their values.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p style="margin: 0in 0in 0in 0.375in; font-family: Calibri; font-size: 11pt"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+This leads to someincorrect assumptions:
+&lt;/p&gt;
+&lt;ul style="margin-left: 0.375in; direction: ltr; unicode-bidi: embed; margin-top: 0in; margin-bottom: 0in"&gt;
+	&lt;li style="margin-top: 0px; margin-bottom: 0px; vertical-align: middle"&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; is proportional to the	number of controls on the page&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul style="margin-left: 0.375in; direction: ltr; unicode-bidi: embed; margin-top: 0in; margin-bottom: 0in"&gt;
+	&lt;li style="margin-top: 0px; margin-bottom: 0px; vertical-align: middle"&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; is tracking all the values	on those controls in EVERY post-back so that it can re-populate ALL of	those values&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&lt;span style="text-decoration: underline"&gt;The most important thing to understand aboutViewState:&lt;/span&gt;
+&lt;/p&gt;
+&lt;ul style="margin-left: 0.375in; direction: ltr; unicode-bidi: embed; margin-top: 0in; margin-bottom: 0in"&gt;
+	&lt;li style="margin-top: 0px; margin-bottom: 0px; vertical-align: middle"&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; is used by controls to store	ALL of their dynamic properties, but &lt;/span&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; TRACKING is only used to	track changes to those properties after &lt;/span&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; Tracking is turned on.&lt;span&gt;&amp;nbsp; &lt;/span&gt;In ASP.NET, &lt;/span&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx"&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;ViewState&lt;/span&gt;&lt;/a&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt; tracking is turned on after	the &lt;/span&gt;&lt;span style="font-style: italic; font-family: Calibri; font-size: 11pt"&gt;On_Init&lt;/span&gt;&lt;span style="font-family: Calibri; font-size: 11pt"&gt;	event of web controls themselves (NOT the page).&lt;span&gt;&amp;nbsp; &lt;/span&gt;Knowing when it matters goes a long way.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+Enough talk.&lt;span&gt;&amp;nbsp; &lt;/span&gt;Following are several examples that illustrate what I mean, half of which may be surprising if you don&amp;#39;t read &lt;a href="http://weblogs.asp.net/infinitiesloop/archive/2006/08/03/Truly-Understanding-Viewstate.aspx"&gt;Dave&amp;#39;spost&lt;/a&gt;.
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+But first, here&amp;#39;s an explanation of the layout of the each example page.
+&lt;/p&gt;
+&lt;img style="width: 700px" src="/pics/ViewState/Explanation.png" alt="Explanation" /&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&lt;a href="/admin/Pages/../../ViewStateExperiment/Page1.aspx" title="Samples"&gt;Examples here&lt;/a&gt;
+&lt;/p&gt;
+&lt;p style="font-family: Calibri; font-size: 11pt; margin: 0in"&gt;
+&lt;a href="/admin/Pages/../../ViewStateExperiment/ViewStateExperiment.zip" title="SourceCode"&gt;
+Source code here
+&lt;/a&gt;
+&lt;/p&gt;
+</content>
+  <ispublished>True</ispublished>
+  <iscommentsenabled>False</iscommentsenabled>
+  <pubDate>2010-10-28 20:00:00</pubDate>
+  <lastModified>2010-10-30 17:26:56</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Fun-with-ViewState</slug>
+  <tags>
+    <tag>code sample</tag>
+    <tag>new developer</tag>
+    <tag>web</tag>
+    <tag>viewstate</tag>
+    <tag>postback</tag>
+    <tag>optimization</tag>
+  </tags>
+  <comments />
+  <categories>
+    <category>c639b7dc-0e9c-4afd-ab19-18525a4b964f</category>
+    <category>101b425c-bd99-49d1-8687-4b93032dae15</category>
+    <category>b6fdbdd2-c031-4899-84e5-5d029d285a29</category>
+  </categories>
+  <notifications />
+</post>

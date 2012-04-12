@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Blog_20110722", "..\Blog_20110722", "{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = ""
+		Debug.AspNetCompiler.VirtualPath = "/Blog_20110722"
+		Debug.AspNetCompiler.PhysicalPath = "..\Blog_20110722\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Blog_20110722\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Blog_20110722"
+		Release.AspNetCompiler.PhysicalPath = "..\Blog_20110722\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Blog_20110722\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "6824"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.ConsoleApp", "..\Blog.ConsoleApp\Blog.ConsoleApp.csproj", "{A0925297-01F8-4CAC-9E9B-B7322EE61BE5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB} = {E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82F96F6-37F5-4025-B1A6-7EABDEF1DCFB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{A0925297-01F8-4CAC-9E9B-B7322EE61BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0925297-01F8-4CAC-9E9B-B7322EE61BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0925297-01F8-4CAC-9E9B-B7322EE61BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0925297-01F8-4CAC-9E9B-B7322EE61BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>Silverlight Data Binding</title>
+  <description>Silverlight Data Binding</description>
+  <content>&lt;p&gt;
+This post compares Data Binding in Silverlight to ASP.NET and showcases a few examples of the different types of bindings you can do with Silverlight.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;b&gt;A Review of .NET Data Binding&lt;/b&gt;
+&lt;br /&gt;
+&lt;a href="http://www.bryanpanjavan.net/post/2010/04/03/ASPNET-Data-Binding-Review.aspx"&gt;Last time I reviewed Data Binding in ASP.NET.&lt;/a&gt;
+  In the end I can draw two main characteristics:
+&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;DataBinding is one-way, from a source variable / collection to the respective control&lt;/li&gt;
+    &lt;li&gt;
+        DataBinding is a “snap-shot” of the data at the time DataBind() is called.  It is NOT a real-time reflection of the current state of the data
+    &lt;/li&gt;
+&lt;/ul&gt;
+	
+&lt;p&gt;
+&lt;b&gt;Moving on to Silverlight Data Binding&lt;/b&gt;
+&lt;br /&gt;
+Silverlight Data Binding is Often described as "Two-Way", as if the only difference is that the data projects both ways.  
+It's slightly more complicated than that, because there are "binding entities" involved this time around.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;b&gt;Establishing the Pact&lt;/b&gt;
+&lt;br /&gt;
+Specifying the Data Source (ItemsSource in Silverlight) of a Framework Element establishes an ongoing  pact between the element and the source object.  
+This pact is embodied by a Binding Object that links the two.
+&lt;/p&gt;
+
+&lt;b&gt;The Binding Object&lt;/b&gt;
+&lt;br /&gt;
+The Binding Object captures the characteristic fields of the pact, such as:
+&lt;ul&gt;
+    &lt;li&gt;
+        Binding Source (ex: CLR Object with readable properties)
+    &lt;/li&gt;
+    &lt;li&gt; 
+        Binding Target (ex: Framework Element with Dependency Properties)
+    &lt;/li&gt;
+    &lt;li&gt;
+        Direction of data flow (OneTime, OneWay, TwoWay) 
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;	
+&lt;b&gt;The Many Possibilities&lt;/b&gt;
+&lt;br /&gt;
+Silverlight offers far greater possibilities regarding what can be bound.  
+In .NET Binding is typically from source collection to target tabular data control.
+&lt;br /&gt;
+Here the target can be any dependency property of a framework element.  Targets are not limited to tabular data controls, but ANY framework element (TextBlock, Button, CheckBox, MyCustomUserControl), 
+and the Source can be any CLR Object, including UI Elements, since they are also CLR objects
+&lt;/p&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:600px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding.png" 
+        alt="Silverlight Databinding relationship" /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+&lt;b&gt;Example 1 - TextBox Foreground&lt;/b&gt;
+&lt;br /&gt;
+My TextBox control has a text value of "Test Colors".  I specify the Foreground property to be bound.  The property name of the object I will bind to is called MainBrush.  Since the Foreground property is of type Brush I expect MainBrush to be of type Brush  The binding is TwoWay, meaning that if my Foreground property should change by some other means, then the value of MainBrush of the respective source object will also change.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_XAML_TextBoxMain.png" 
+        alt="Example 1 - Markup - TextboxMain" /&gt;
+&lt;br /&gt;
+textboxMain : TextBox
+&lt;/center&gt;
+&lt;br /&gt;
+My source CLR object class is a custom class I call MyColors.
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Class_MyColors.png" 
+        alt="Example 1 - Code - MyColors class" /&gt;
+&lt;br /&gt;
+The MyColors class
+&lt;/center&gt;
+&lt;br /&gt;
+And here is the code where I instantiate MyColors class and set the MainBrush property.  Then I establish my pact by setting the DataContext of textboxMain.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; " 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Code_BindTextBoxMain.png" 
+        alt="Example 1 - Code - MyColors class" /&gt;
+&lt;br /&gt;
+Binding textboxMain
+&lt;/center&gt;
+&lt;br /&gt;
+So here is my setup:
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:600px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_TextBoxMain.png" 
+        alt="Example 1 - Diagram" /&gt;
+&lt;br /&gt;
+Example 1 - Relationship Diagram
+    &lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+The result as you would expect is my TextBox with the Foreground property matching what I specified in the code.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example1_TextBoxColored.png" 
+        alt="Example 1 - Result" /&gt;
+&lt;br /&gt;
+Example 1 - Relationship Diagram
+    &lt;br /&gt;
+&lt;/center&gt;
+&lt;b&gt;Example 2 - Change the TextBox Foreground&lt;/b&gt;
+I place a button that changes the value of the Foreground property from green to red and visa versa.  Note that I'm not touching the value of my MyColors object that my TextBox is bound to.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:700px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example2_Code_ButtonChangeTextBoxColor.png" 
+        alt="Example 2 - Code to change color" /&gt;
+&lt;br /&gt;
+Example 2 - Code to change Foreground color
+    &lt;br /&gt;
+
+&lt;/center&gt;
+&lt;br /&gt;
+Because the binding is TwoWay, changing this Foreground property should change the value of my MyColors.MainBrush object.  You can't see this so I add a TextBlock that establishes a OneWay binding with my MyColors.MainBrush.Color property.  So anytime the value of MainBrush changes, my TextBlock will reflect that value.
+&lt;br /&gt;
+&lt;br /&gt;
+Our new relationship diagram:
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:600px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_MultipleBindings.png" 
+        alt="Example 2 - New Relationship Diagram" /&gt;
+&lt;br /&gt;
+Example 2 - New Relationship Diagram
+    &lt;br /&gt;
+
+&lt;/center&gt;
+&lt;br /&gt;
+The result is that when I click my button to change the Foreground property, the value of my CLR object property changes, and the updated value propagates to my TextBlock.
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example2_Result_ButtonChangesColorAndLabel.png" 
+        alt="Example 2 - Result" /&gt;
+&lt;br /&gt;
+Example 2 - Result
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+&lt;b&gt;Example 3 - Binding without setting a property
+&lt;/b&gt;
+&lt;br /&gt;
+When I declare a binding, I set the bound property to the property of the CLR source object.  If I do NOT declare the property to grab, the binding engine will interpret the object's value if it can.  In this next example, I use a Customer class:
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example3_Class_Customer.png" 
+        alt="Example 3 - Customer Class" /&gt;
+&lt;br /&gt;
+Example 3 - Customer Class
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+When I setup my binding to a TextBlock, I declare the binding with no bound property, so the binding engine calls the ToString() method of my Customer class.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:700px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example3_BindingCustomer.png" 
+        alt="Example 3 - Binding" /&gt;
+&lt;br /&gt;
+Example 3 - Binding to a Customer object with no default property specified
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example3_Result.png" 
+        alt="Example 3 - Result" /&gt;
+&lt;br /&gt;
+Example 3 Result - Output ToString() Method
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+&lt;b&gt;
+Example 4 - Setting DataContext on the parent control
+&lt;/b&gt;
+&lt;br /&gt;
+Suppose I have a form that displays multiple fields of information for my Customer object.  Below I have a StackPanel with 3 controls that I want bound: 
+&lt;ul&gt;
+    &lt;li&gt;TextBlock bound to FullName property&lt;/li&gt;
+    &lt;li&gt;TextBlock bound to Customer Type&lt;/li&gt;
+    &lt;li&gt;Image control bound to PhotoID Property&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example4_Markup_StackPanel.png" 
+        alt="Example 4 - StackPanel" /&gt;
+&lt;br /&gt;
+Example 4 - StackPanel
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+Rather than set the DataContext of each control individually, I can set the DataContext of the parent control and all children of my StackPanel will inherit the bound relationship.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black; width:700px;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example4_Code_BindStackPanel.png" 
+        alt="Example 4 - Bind StackPanel" /&gt;
+&lt;br /&gt;
+Example 4 - Bind StackPanel
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+The result - All 3 controls receive their queue to Bind to the same source.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example4_Result.png" 
+        alt="Example 4 - Result" /&gt;
+&lt;br /&gt;
+Example 4 - Result - All child controls bound
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+Yes, an image can be bound too
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;b&gt;Example 5 - Binding a Framework Element to another Framework Element&lt;/b&gt;
+&lt;br /&gt;
+In my final example, I bind a Slider control to a TextBox.  My TextBox is my source, and my Slider is my target.  By establishing a binding set to TwoWay mode, changing one changes the other.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example5_Markup.png" 
+        alt="Example 5 - Slider Control Bound to TextBox" /&gt;
+&lt;br /&gt;
+Example 5 - Slider Control Bound to TextBox
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+The result:
+&lt;br /&gt;
+&lt;center&gt;
+    &lt;img
+        style="border: solid 1px black;" 
+        src="http://www.bryanpanjavan.net/pics/Silverlight3_Databinding/Blog_SilverlightDataBinding_Example5_Result.png" 
+        alt="Example 5 - Result - TextBox Value moves with the Slider" /&gt;
+&lt;br /&gt;
+Example 5 - Result - TextBox Value moves with the Slider
+&lt;br /&gt;
+&lt;/center&gt;
+&lt;br /&gt;
+&lt;a href="http://www.bryanpanjavan.net/silverlight_databinding/silverlight_binding.html"&gt;The full example page can be found here&lt;/a&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;b&gt;Conclusion&lt;/b&gt;
+&lt;br /&gt;
+Note that I never once called DataBind().  Recall that in .NET, the DataBind() method takes a "snap-shot" of the data of the underlying CLR object at the time the call is made.  With Silverlight It's not about taking "snap-shots", but rather establishing binding pacts that by default will continue to project changes from the source object.
+</content>
+  <ispublished>False</ispublished>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2010-05-02 22:53:00</pubDate>
+  <lastModified>2010-05-03 00:48:24</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Silverlight-Data-Binding</slug>
+  <tags>
+    <tag>code sample</tag>
+    <tag>databinding</tag>
+    <tag>new developer</tag>
+    <tag>silverlight</tag>
+  </tags>
+  <comments />
+  <categories>
+    <category>101b425c-bd99-49d1-8687-4b93032dae15</category>
+    <category>1f7b77d6-2725-4eb8-853d-79dc6cd05bfd</category>
+    <category>cb1e0b97-584b-410b-998f-108a5effdada</category>
+  </categories>
+  <notifications />
+</post>

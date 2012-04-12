@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ViewStateMasterCore.master.cs" Inherits="MasterPages_ViewStateMasterCore" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="contentplaceholderHead" runat="server">
+    </asp:ContentPlaceHolder>
+<script type="text/javascript">
+<!--
+    function GoToNewPage(ddlSender) {
+        location.href = ddlSender.value;
+    }
+
+
+//-->
+</script>
+</head>
+<body>
+    <form id="formMain" runat="server">
+        <select id="ddlSelectPage" onchange="GoToNewPage(this);" >
+            <option value="Page1.aspx">1 - One Label No Default Value</option>
+            <option value="Page2.aspx">2 - Many controls No Default Value</option>
+            <option value="Page3.aspx">3 - One Label WITH Default Value</option>
+            <option value="Page4.aspx">4 - Many controls WITH Default Value</option>
+            <option value="Page5.aspx">5 - One Label Value set OnLoad</option>
+            <option value="Page6.aspx">6 - One Label Value set OnPageInit</option>
+            <option value="Page7.aspx">7 - One Label Value Set OnLabelInit</option>
+            <option value="Page8.aspx">8 - One Label Value Set Inline Code</option>
+            <option value="Page9.aspx">9 - One Label ForeColor set OnLoad</option>
+            <option value="Page10.aspx">10 - Many controls all set OnLoad</option>
+        </select>
+        <script type="text/javascript">
+        <!--
+            var sPath = window.location.pathname;
+            var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+            var ddlSelectPage = document.getElementById("ddlSelectPage");
+            ddlSelectPage.value = sPage;
+        //-->
+        </script>
+        <br />
+        <asp:ContentPlaceHolder id="contentplaceholderMain" runat="server">
+                                
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

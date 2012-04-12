@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>SQL Chops Episode #1 - Table Of All Dates</title>
+  <description>SQL Chops Episode #1 - Table of all dates</description>
+  <content>&lt;br /&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/SelectFromFunction.png"&gt;
+&lt;img style="width: 400px" class="image" src="/pics/TableOfAllDates/SelectFromFunction.png" alt="Table Of All Dates" /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;
+This script is for a table function of all dates for a given range.
+&lt;/p&gt;
+&lt;!-- code formatted by http://manoli.net/csharpformat/ --&gt;
+&lt;pre class="csharpcode" style="width: 700px; height: 200px; overflow-x: auto; overflow-y: auto"&gt;
+&lt;span class="kwrd"&gt;USE&lt;/span&gt; [MyDB]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+/****** &lt;span class="kwrd"&gt;Object&lt;/span&gt;:  UserDefinedFunction [dbo].[fn_GetCalendarDateTableAllRange]    Script &lt;span class="kwrd"&gt;Date&lt;/span&gt;: 01/23/2012 11:12:40 ******/
+&lt;span class="kwrd"&gt;IF&lt;/span&gt;  &lt;span class="kwrd"&gt;EXISTS&lt;/span&gt; (&lt;span class="kwrd"&gt;SELECT&lt;/span&gt; * &lt;span class="kwrd"&gt;FROM&lt;/span&gt; sys.objects &lt;span class="kwrd"&gt;WHERE&lt;/span&gt; object_id = OBJECT_ID(N&lt;span class="str"&gt;&amp;#39;[dbo].[fn_GetCalendarDateTableAllRange]&amp;#39;&lt;/span&gt;) &lt;span class="kwrd"&gt;AND&lt;/span&gt; type &lt;span class="kwrd"&gt;in&lt;/span&gt; (N&lt;span class="str"&gt;&amp;#39;FN&amp;#39;&lt;/span&gt;, N&lt;span class="str"&gt;&amp;#39;IF&amp;#39;&lt;/span&gt;, N&lt;span class="str"&gt;&amp;#39;TF&amp;#39;&lt;/span&gt;, N&lt;span class="str"&gt;&amp;#39;FS&amp;#39;&lt;/span&gt;, N&lt;span class="str"&gt;&amp;#39;FT&amp;#39;&lt;/span&gt;))
+&lt;span class="kwrd"&gt;DROP&lt;/span&gt; &lt;span class="kwrd"&gt;FUNCTION&lt;/span&gt; [dbo].[fn_GetCalendarDateTableAllRange]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;USE&lt;/span&gt; [MyDB]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+/****** &lt;span class="kwrd"&gt;Object&lt;/span&gt;:  UserDefinedFunction [dbo].[fn_GetCalendarDateTableAllRange]    Script &lt;span class="kwrd"&gt;Date&lt;/span&gt;: 01/23/2012 11:12:40 ******/
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span class="kwrd"&gt;ON&lt;/span&gt;
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span class="kwrd"&gt;ON&lt;/span&gt;
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;CREATE&lt;/span&gt; &lt;span class="kwrd"&gt;FUNCTION&lt;/span&gt; [dbo].[fn_GetCalendarDateTableAllRange]
+(    
+@minDateInclusive &lt;span class="kwrd"&gt;DATE&lt;/span&gt; 
+,@maxDateInclusive &lt;span class="kwrd"&gt;DATE&lt;/span&gt; 
+)
+&lt;span class="kwrd"&gt;RETURNS&lt;/span&gt;     
+@CalendarDateAllRange &lt;span class="kwrd"&gt;TABLE&lt;/span&gt;
+(CalendarDate &lt;span class="kwrd"&gt;DATE&lt;/span&gt;    )
+&lt;span class="kwrd"&gt;AS&lt;/span&gt;
+&lt;span class="kwrd"&gt;BEGIN&lt;/span&gt;
+&lt;span class="kwrd"&gt;IF&lt;/span&gt; @minDateInclusive &amp;gt; @maxDateInclusive
+&lt;span class="kwrd"&gt;RETURN&lt;/span&gt;
+&lt;span class="kwrd"&gt;DECLARE&lt;/span&gt; @loopCurrentDate &lt;span class="kwrd"&gt;DATE&lt;/span&gt;
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @loopCurrentDate = @minDateInclusive
+&lt;span class="kwrd"&gt;WHILE&lt;/span&gt; @loopCurrentDate &amp;lt;= @maxDateInclusive
+&lt;span class="kwrd"&gt;BEGIN&lt;/span&gt;
+&lt;span class="kwrd"&gt;INSERT&lt;/span&gt; &lt;span class="kwrd"&gt;INTO&lt;/span&gt; @CalendarDateAllRange &lt;span class="kwrd"&gt;VALUES&lt;/span&gt;  (@loopCurrentDate)
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @loopCurrentDate = DATEADD(&lt;span class="kwrd"&gt;DAY&lt;/span&gt;,1,@loopCurrentDate)
+&lt;span class="kwrd"&gt;END&lt;/span&gt;
+&lt;span class="kwrd"&gt;RETURN&lt;/span&gt;
+&lt;span class="kwrd"&gt;END&lt;/span&gt;
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;
+This can be useful if I want report of how many customers enrolled with my service on each day of the month.  
+&lt;br /&gt;
+Lets say I had a table of customer enrollments with a date of enrollment for each.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;/p&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/CustomerEnrollmentTable.png"&gt;
+&lt;img class="image" src="/pics/TableOfAllDates/CustomerEnrollmentTable.png" alt="Customer Enrollment Table" /&gt;
+&lt;/a&gt;
+&lt;br /&gt;
+&lt;em&gt;Customer Enrollment Table&lt;/em&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Grouping these without leveraging my date table does not show me the dates that we had no enrollments, and does not illustrate the clear gaps.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/SelectEnrollmentDateCounts.png"&gt;
+&lt;img class="image" src="/pics/TableOfAllDates/SelectEnrollmentDateCounts.png" alt="Select Enrollment Date Counts" /&gt;
+&lt;/a&gt;
+&lt;br /&gt;
+&lt;em&gt;Enrollment Counts by Date&lt;/em&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Using excel I get a graph that visually lies to me
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/EnrollmentCountGraph1.png"&gt;
+&lt;img class="image" src="/pics/TableOfAllDates/EnrollmentCountGraph1.png" alt="Enrollment Graph 1" /&gt;
+&lt;/a&gt;
+&lt;br /&gt;
+&lt;em&gt;Enrollment Graph #1&lt;/em&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+But by using our comprehensive date table as our base, we get a full chronological view.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/SelectEnrollmentDateCountsFull.png"&gt;
+&lt;img class="image" src="/pics/TableOfAllDates/SelectEnrollmentDateCountsFull.png" alt="Select Enrollment Date Counts Full" /&gt;
+&lt;/a&gt;
+&lt;br /&gt;
+&lt;em&gt;Enrollment Counts by Date with Full Dates&lt;/em&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Using excel I can get a more truthful graph.
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;div style="text-align: center"&gt;
+&lt;a href="/pics/TableOfAllDates/EnrollmentCountGraph2.png"&gt;
+&lt;img class="image" src="/pics/TableOfAllDates/EnrollmentCountGraph2.png" alt="Enrollment Graph 2" /&gt;
+&lt;/a&gt;
+&lt;br /&gt;
+&lt;em&gt;Enrollment Graph #2&lt;/em&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+But this function only gives me an un-indexed inmemory table variable which will not scale for a larger time period.
+&lt;br /&gt;
+In that case, the following script creates the permenant table that we would need and applies a primary key to the single column which automatically creates a clustered index.
+&lt;p&gt;
+&amp;nbsp;
+&lt;/p&gt;
+&lt;!-- code formatted by http://manoli.net/csharpformat/ --&gt;
+&lt;pre class="csharpcode" style="width: 700px; height: 200px; overflow-x: auto; overflow-y: auto"&gt;
+&lt;span class="kwrd"&gt;USE&lt;/span&gt; [MyDB]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+/****** &lt;span class="kwrd"&gt;Object&lt;/span&gt;:  &lt;span class="kwrd"&gt;Table&lt;/span&gt; [dbo].[CalendarDateAllRange]    Script &lt;span class="kwrd"&gt;Date&lt;/span&gt;: 02/17/2012 22:20:18 ******/
+&lt;span class="kwrd"&gt;IF&lt;/span&gt;  &lt;span class="kwrd"&gt;EXISTS&lt;/span&gt; (&lt;span class="kwrd"&gt;SELECT&lt;/span&gt; * &lt;span class="kwrd"&gt;FROM&lt;/span&gt; sys.objects &lt;span class="kwrd"&gt;WHERE&lt;/span&gt; object_id = OBJECT_ID(N&lt;span class="str"&gt;&amp;#39;[dbo].[CalendarDateAllRange]&amp;#39;&lt;/span&gt;) &lt;span class="kwrd"&gt;AND&lt;/span&gt; type &lt;span class="kwrd"&gt;in&lt;/span&gt; (N&lt;span class="str"&gt;&amp;#39;U&amp;#39;&lt;/span&gt;))
+&lt;span class="kwrd"&gt;DROP&lt;/span&gt; &lt;span class="kwrd"&gt;TABLE&lt;/span&gt; [dbo].[CalendarDateAllRange]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;USE&lt;/span&gt; [MyDB]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+/****** &lt;span class="kwrd"&gt;Object&lt;/span&gt;:  &lt;span class="kwrd"&gt;Table&lt;/span&gt; [dbo].[CalendarDateAllRange]    Script &lt;span class="kwrd"&gt;Date&lt;/span&gt;: 02/17/2012 22:20:19 ******/
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span class="kwrd"&gt;ON&lt;/span&gt;
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span class="kwrd"&gt;ON&lt;/span&gt;
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="kwrd"&gt;CREATE&lt;/span&gt; &lt;span class="kwrd"&gt;TABLE&lt;/span&gt; [dbo].[CalendarDateAllRange](
+[CalendarDate] [&lt;span class="kwrd"&gt;date&lt;/span&gt;] &lt;span class="kwrd"&gt;NOT&lt;/span&gt; &lt;span class="kwrd"&gt;NULL&lt;/span&gt;,
+&lt;span class="kwrd"&gt;CONSTRAINT&lt;/span&gt; [PK_CalendarDateAllRange] &lt;span class="kwrd"&gt;PRIMARY&lt;/span&gt; &lt;span class="kwrd"&gt;KEY&lt;/span&gt; &lt;span class="kwrd"&gt;CLUSTERED&lt;/span&gt; 
+(
+[CalendarDate] &lt;span class="kwrd"&gt;ASC&lt;/span&gt;
+)&lt;span class="kwrd"&gt;WITH&lt;/span&gt; (PAD_INDEX  = &lt;span class="kwrd"&gt;OFF&lt;/span&gt;, STATISTICS_NORECOMPUTE  = &lt;span class="kwrd"&gt;OFF&lt;/span&gt;, IGNORE_DUP_KEY = &lt;span class="kwrd"&gt;OFF&lt;/span&gt;, ALLOW_ROW_LOCKS  = &lt;span class="kwrd"&gt;ON&lt;/span&gt;, ALLOW_PAGE_LOCKS  = &lt;span class="kwrd"&gt;ON&lt;/span&gt;) &lt;span class="kwrd"&gt;ON&lt;/span&gt; [&lt;span class="kwrd"&gt;PRIMARY&lt;/span&gt;]
+) &lt;span class="kwrd"&gt;ON&lt;/span&gt; [&lt;span class="kwrd"&gt;PRIMARY&lt;/span&gt;]
+&lt;span class="kwrd"&gt;GO&lt;/span&gt;
+&lt;span class="rem"&gt;-- Now populate the dates in the table&lt;/span&gt;
+&lt;span class="kwrd"&gt;DECLARE&lt;/span&gt;    @minDateInclusive &lt;span class="kwrd"&gt;DATE&lt;/span&gt; 
+&lt;span class="kwrd"&gt;DECLARE&lt;/span&gt; @maxDateInclusive &lt;span class="kwrd"&gt;DATE&lt;/span&gt; 
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @minDateInclusive = &lt;span class="str"&gt;&amp;#39;1/4/2010&amp;#39;&lt;/span&gt;
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @maxDateInclusive = &lt;span class="str"&gt;&amp;#39;5/2/2012&amp;#39;&lt;/span&gt;
+&lt;span class="kwrd"&gt;DECLARE&lt;/span&gt; @loopCurrentDate &lt;span class="kwrd"&gt;DATE&lt;/span&gt;
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @loopCurrentDate = @minDateInclusive
+&lt;span class="kwrd"&gt;WHILE&lt;/span&gt; @loopCurrentDate &amp;lt;= @maxDateInclusive
+&lt;span class="kwrd"&gt;BEGIN&lt;/span&gt;
+&lt;span class="kwrd"&gt;INSERT&lt;/span&gt; &lt;span class="kwrd"&gt;INTO&lt;/span&gt; CalendarDateAllRange &lt;span class="kwrd"&gt;VALUES&lt;/span&gt;  (@loopCurrentDate)
+&lt;span class="kwrd"&gt;SET&lt;/span&gt; @loopCurrentDate = DATEADD(&lt;span class="kwrd"&gt;DAY&lt;/span&gt;,1,@loopCurrentDate)
+&lt;span class="kwrd"&gt;END&lt;/span&gt;
+&lt;span class="kwrd"&gt;SELECT&lt;/span&gt; * &lt;span class="kwrd"&gt;FROM&lt;/span&gt; CalendarDateAllRange
+&lt;/pre&gt;
+&lt;br /&gt;
+But lets be clear that only under rare circumstance should you create a foreign key reference to this table. There would be no benefit to doing so and you would only be hindering performance of your child table.
+&lt;p&gt;
+Scripts available below
+&lt;br /&gt;
+&lt;a href="/Download/Blog_TableOfAllDates/fn_GetCalendarDateTableAllRange.txt"&gt;fn_GetCalendarDateTableAllRange.sql&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href="/Download/Blog_TableOfAllDates/DropAndCreateCalendarDetailTable.txt"&gt;DropAndCreateCalendarDetailTable.sql&lt;/a&gt;
+&lt;/p&gt;
+</content>
+  <ispublished>True</ispublished>
+  <iscommentsenabled>False</iscommentsenabled>
+  <pubDate>2012-02-18 00:47:00</pubDate>
+  <lastModified>2012-02-18 20:01:41</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>SQL-Chops-Episode-1-Table-of-all-dates</slug>
+  <tags>
+    <tag>sql server</tag>
+  </tags>
+  <comments />
+  <categories>
+    <category>6c1e36cb-0493-4358-888b-0fc9523a8aee</category>
+  </categories>
+  <notifications />
+</post>

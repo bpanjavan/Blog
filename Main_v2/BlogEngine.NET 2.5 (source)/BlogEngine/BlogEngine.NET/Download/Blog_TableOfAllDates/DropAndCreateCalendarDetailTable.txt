@@ -1,0 +1,50 @@
+USE [MyDB]
+GO
+
+/****** Object:  Table [dbo].[CalendarDateAllRange]    Script Date: 02/17/2012 22:20:18 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CalendarDateAllRange]') AND type in (N'U'))
+DROP TABLE [dbo].[CalendarDateAllRange]
+GO
+
+USE [MyDB]
+GO
+
+/****** Object:  Table [dbo].[CalendarDateAllRange]    Script Date: 02/17/2012 22:20:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CalendarDateAllRange](
+	[CalendarDate] [date] NOT NULL,
+ CONSTRAINT [PK_CalendarDateAllRange] PRIMARY KEY CLUSTERED 
+(
+	[CalendarDate] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+-- Now populate the dates in the table
+DECLARE	@minDateInclusive DATE 
+DECLARE @maxDateInclusive DATE 
+
+SET @minDateInclusive = '1/4/2010'
+SET @maxDateInclusive = '5/2/2012'
+
+DECLARE @loopCurrentDate DATE
+SET @loopCurrentDate = @minDateInclusive
+WHILE @loopCurrentDate <= @maxDateInclusive
+BEGIN
+	INSERT INTO CalendarDateAllRange VALUES  (@loopCurrentDate)
+	SET @loopCurrentDate = DATEADD(DAY,1,@loopCurrentDate)
+END
+
+SELECT * FROM CalendarDateAllRange
+
+
+
+
+

@@ -1,0 +1,26 @@
+﻿<FileRouterPacket>
+  <Head>
+    <Status></Status>
+    <Message></Message>
+  </Head>
+  <Body>
+    <FileId>2f15a666-ed63-4576-9132-38f16a528160</FileId>
+    <FileBytes></FileBytes>
+    <FileName></FileName>
+    <FileExtension></FileExtension>
+    <CreatedOn></CreatedOn>
+    <CreatedBy></CreatedBy>
+    <ModifiedOn></ModifiedOn>
+    <ModifiedBy></ModifiedBy>
+  </Body>
+</FileRouterPacket>
+
+
+
+
+
+
+
+
+
+

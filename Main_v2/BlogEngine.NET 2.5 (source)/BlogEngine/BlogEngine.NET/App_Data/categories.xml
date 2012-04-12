@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<categories>
+    <category id="c639b7dc-0e9c-4afd-ab19-18525a4b964f" description="" parent="">ASP.NET</category>
+    <category id="19770e74-9ec9-4cde-b2ab-e5051aaaf348" description="Posts about my adventures with BlogEngine.NET" parent="">BlogEngine.NET</category>
+    <category id="c0873f4d-96e7-4a31-b4ba-b911d88dd5ad" description="" parent="">Commentary</category>
+    <category id="d3ba4f9e-badd-4aff-8187-a8e9f2d52788" description="" parent="">CRM</category>
+    <category id="cb1e0b97-584b-410b-998f-108a5effdada" description="" parent="">Data</category>
+    <category id="101b425c-bd99-49d1-8687-4b93032dae15" description="" parent="">Development</category>
+    <category id="6c846d9c-0c75-4cf7-97a7-da0a329c7786" description="" parent="">Factory Pattern</category>
+    <category id="abb9fed8-19a4-4be4-8d6a-7183dc19016f" description="" parent="">iOS</category>
+    <category id="0229875d-6e79-4c4c-9dc1-9ad52ff3cc5c" description="" parent="">JQuery</category>
+    <category id="e7b28577-fb39-43b0-bed0-15c12842baef" description="" parent="">Linq to SQL</category>
+    <category id="cb5a6eb9-7be9-46bf-961d-10460969d636" description="" parent="">Linq to XML</category>
+    <category id="eeae3c3b-7b6f-48e5-8447-c54dd8d6c764" description="" parent="">Memory Management</category>
+    <category id="e656095d-efaa-4d3a-9512-f189288a153a" description="" parent="">Miscellaneous</category>
+    <category id="6f8dd1a2-8511-4140-866b-b7e9ffcad0bb" description="" parent="">Model-View-Controller</category>
+    <category id="ff97de04-87ae-4e6f-8a62-ae733034f9bd" description="" parent="">Objective-C</category>
+    <category id="ecb0fa01-d76f-4075-80dd-d4f8faf50f0e" description="" parent="">SharePoint</category>
+    <category id="1f7b77d6-2725-4eb8-853d-79dc6cd05bfd" description="" parent="">Silverlight</category>
+    <category id="f1c814c6-7998-4d6e-b751-366d1c7b195d" description="" parent="">Unit Testing</category>
+    <category id="b6fdbdd2-c031-4899-84e5-5d029d285a29" description="" parent="">Web Development</category>
+    <category id="bac9202d-d73e-4cda-a407-34774afa0b18" description="" parent="">SSIS</category>
+    <category id="6c1e36cb-0493-4358-888b-0fc9523a8aee" description="" parent="">SQL Server Integration Services</category>
+</categories>

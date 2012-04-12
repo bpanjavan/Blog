@@ -1,0 +1,22 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="FileRouterHeadSoap" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+          <endpoint address="http://lumina:81/filerouter/filerouterhead.asmx"
+              binding="basicHttpBinding" bindingConfiguration="FileRouterHeadSoap"
+              contract="FileRouter.FileRouterHeadSoap" name="FileRouterHeadSoap" />
+<!--
+                <endpoint address="http://www.bryanpanjavan.net/filerouter/filerouterhead.asmx"
+            binding="basicHttpBinding" bindingConfiguration="FileRouterHeadSoap"
+            contract="FileRouter.FileRouterHeadSoap" name="FileRouterHeadSoap" />
+-->
+</client>
+    </system.serviceModel>
+</configuration>

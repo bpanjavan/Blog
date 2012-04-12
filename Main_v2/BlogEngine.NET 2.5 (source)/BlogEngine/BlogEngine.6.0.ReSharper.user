@@ -1,0 +1,37 @@
+<Configuration>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/f:Web.Config" caret="1048" fromTop="20" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:App_Data/f:roles.xml" caret="314" fromTop="15" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/f:default.aspx" caret="350" fromTop="6" />
+      <File id="FDC04B4F-AF72-4AAE-8691-A5E391765E3F/f:default.aspx" caret="429" fromTop="7" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:themes/d:TitaniumX/f:style.css" caret="856" fromTop="24" />
+      <File id="FDC04B4F-AF72-4AAE-8691-A5E391765E3F/f:site.master" caret="677" fromTop="10" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:themes/d:TitaniumX/f:site.master" caret="888" fromTop="16" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:App_Data/f:roles.xml" caret="378" fromTop="19" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:themes/d:TitaniumX/f:style.css" caret="811" fromTop="20" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:themes/d:TitaniumX/f:style.css" caret="856" fromTop="24" />
+      <File id="B02E9840-1261-47AB-AE40-D333E73BB2C0/d:themes/d:TitaniumX/f:site.master" caret="695" fromTop="10" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+</Configuration>

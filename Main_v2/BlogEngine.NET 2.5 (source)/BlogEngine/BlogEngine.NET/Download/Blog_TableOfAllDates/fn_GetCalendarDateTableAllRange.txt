@@ -1,0 +1,52 @@
+USE [A4]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[fn_GetCalendarDateTableAllRange]    Script Date: 01/23/2012 11:12:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[fn_GetCalendarDateTableAllRange]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[fn_GetCalendarDateTableAllRange]
+GO
+
+USE [A4]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[fn_GetCalendarDateTableAllRange]    Script Date: 01/23/2012 11:12:40 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Bryan Panjavan
+-- Description:	Get a table that spans the min date to the max date range
+
+-- =============================================
+CREATE FUNCTION [dbo].[fn_GetCalendarDateTableAllRange]
+(	
+	@minDateInclusive DATE 
+	,@maxDateInclusive DATE 
+)
+RETURNS 	
+	@CalendarDateAllRange TABLE
+	(CalendarDate DATE	)
+AS
+BEGIN
+	IF @minDateInclusive > @maxDateInclusive
+		RETURN
+
+
+	DECLARE @loopCurrentDate DATE
+	SET @loopCurrentDate = @minDateInclusive
+	WHILE @loopCurrentDate <= @maxDateInclusive
+	BEGIN
+		INSERT INTO @CalendarDateAllRange VALUES  (@loopCurrentDate)
+		SET @loopCurrentDate = DATEADD(DAY,1,@loopCurrentDate)
+	END
+	
+	RETURN
+END
+GO
+
+

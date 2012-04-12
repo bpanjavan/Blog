@@ -1,0 +1,40 @@
+﻿html {
+	overflow-x: hidden;
+}
+/* This is the box that is parent to the dragable items */
+#widgetzone {
+	padding: 10px; /* Air */
+}
+.clear {
+	clear: both;
+}
+
+/* END DEMO CSS */
+
+/* REQUIRED CSS */
+
+#rectangle {
+	float: left;
+	border: 1px dotted #F00; /* Red border */
+	background-color: #FFF;
+	z-index: 0;
+	position: relative;
+}
+#insertionMarker {
+	/* Don't change the rules for the insertionMarker */
+	width: 6px;
+	position: absolute;
+	display: none;
+}
+#insertionMarker img {
+	/* Don't change the rules for the insertionMarker */
+	float: left;
+}
+#dragDropMoveLayer {
+	/* Dragable layer - Not need if you're using 'rectangle' mode */
+	position: absolute;
+	display: none;
+	border: 1px solid #000;
+	filter: alpha(opacity=50); /* 50% opacity , i.e. transparency */
+	opacity: 0.5; /* 50% opacity , i.e. transparency */
+}

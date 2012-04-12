@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>bpanjavan</author>
+  <title>Test Post</title>
+  <description />
+  <content>Test Post Content
+</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2012-02-26 01:13:00</pubDate>
+  <lastModified>2012-03-05 18:17:41</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Test-Post</slug>
+  <tags />
+  <comments>
+    <comment id="f28cbb91-640e-4c0d-9d98-45004dce997d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-02-26 01:14:35</date>
+      <author>bpanjavan</author>
+      <email>bpanjavan@yahoo.com</email>
+      <country />
+      <ip>::1</ip>
+      <website>http://www.google.com/</website>
+      <content>Test</content>
+    </comment>
+    <comment id="544adcc1-5262-447f-8619-c70363aa8410" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-03-05 23:59:59</date>
+      <author>bpanjavan</author>
+      <email>bpanjavan@yahoo.com</email>
+      <country>us</country>
+      <ip>::1</ip>
+      <avatar />
+      <content>Goodbye Cruel World!</content>
+    </comment>
+    <comment id="3e803e89-8835-47f8-b4de-1f9807653deb" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-03-06 00:16:50</date>
+      <author>bpanjavan</author>
+      <email>bpanjavan@yahoo.com</email>
+      <country>us</country>
+      <ip>::1</ip>
+      <avatar />
+      <content>Yippie kai yay</content>
+    </comment>
+    <comment id="bb7f090c-9a16-4f84-b66c-87aa534f0568" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2012-03-06 00:17:41</date>
+      <author>JoeBloe</author>
+      <email>fake@mii.com</email>
+      <country>us</country>
+      <ip>::1</ip>
+      <moderatedby>bpanjavan</moderatedby>
+      <avatar />
+      <content>What??</content>
+    </comment>
+  </comments>
+  <categories />
+  <notifications />
+</post>

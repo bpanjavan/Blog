@@ -1,0 +1,16 @@
+﻿<FileRouterPacket>
+  <Head>
+    <Status></Status>
+    <Message></Message>
+  </Head>
+  <Body>
+    <FileId></FileId>
+    <FileBytes></FileBytes>
+    <FileName></FileName>
+    <FileExtension></FileExtension>
+    <CreatedOn></CreatedOn>
+    <CreatedBy></CreatedBy>
+    <ModifiedOn></ModifiedOn>
+    <ModifiedBy></ModifiedBy>
+  </Body>
+</FileRouterPacket>

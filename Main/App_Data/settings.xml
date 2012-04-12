@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <smtppassword>wingzero</smtppassword>
+  <avatar>none</avatar>
+  <storagelocation>~/App_Data/</storagelocation>
+  <enablecountryincomments>True</enablecountryincomments>
+  <searchcommentlabeltext>Include comments in search</searchcommentlabeltext>
+  <enablerating>True</enablerating>
+  <enablerelatedposts>True</enablerelatedposts>
+  <postsperfeed>10</postsperfeed>
+  <administratorrole>Administrators</administratorrole>
+  <fileextension>.aspx</fileextension>
+  <removewhitespaceinstylesheets>False</removewhitespaceinstylesheets>
+  <geocodinglatitude />
+  <useblognameinpagetitles>True</useblognameinpagetitles>
+  <showlivepreview>True</showlivepreview>
+  <enablecommentsearch>True</enablecommentsearch>
+  <authorname>Bryan Panjavan</authorname>
+  <displaycommentsonrecentposts>True</displaycommentsonrecentposts>
+  <theme>GreyShadow_Custom</theme>
+  <iscommentsenabled>True</iscommentsenabled>
+  <enablessl>False</enablessl>
+  <postsperpage>10</postsperpage>
+  <htmlheader />
+  <mobiletheme>Mobile</mobiletheme>
+  <syndicationformat>Rss</syndicationformat>
+  <blogrollmaxlength>23</blogrollmaxlength>
+  <showpostnavigation>False</showpostnavigation>
+  <email>bpanjavan@gmail.com</email>
+  <enablepingbacksend>True</enablepingbacksend>
+  <dayscommentsareenabled>0</dayscommentsareenabled>
+  <endorsement>http://www.dotnetblogengine.net/syndication.axd</endorsement>
+  <showdescriptioninpostlist>False</showdescriptioninpostlist>
+  <blogrollvisibleposts>3</blogrollvisibleposts>
+  <timezone>-6</timezone>
+  <enableenclosures>False</enableenclosures>
+  <enablepingbackreceive>True</enablepingbackreceive>
+  <smtpusername>bpanjavan</smtpusername>
+  <searchdefaulttext>Enter search term or APML url</searchdefaulttext>
+  <requiresslmetaweblogapi>False</requiresslmetaweblogapi>
+  <iscocommentenabled>False</iscocommentenabled>
+  <enabletrackbackreceive>True</enabletrackbackreceive>
+  <trackingscript />
+  <compresswebresource>False</compresswebresource>
+  <description>ASP.NET / Silverlight Developer</description>
+  <alternatefeedurl />
+  <enableopensearch>True</enableopensearch>
+  <numberofrecentposts>10</numberofrecentposts>
+  <displayratingsonrecentposts>True</displayratingsonrecentposts>
+  <numberofrecentcomments>10</numberofrecentcomments>
+  <searchbuttontext>Search</searchbuttontext>
+  <name>Bryan Panjavan's Blog</name>
+  <emailsubjectprefix>Weblog</emailsubjectprefix>
+  <handlewwwsubdomain />
+  <contactformmessage>&lt;p&gt;I'll answer the mail as soon as I can.&lt;/p&gt;</contactformmessage>
+  <enabletrackbacksend>True</enabletrackbacksend>
+  <smtpserverport>25</smtpserverport>
+  <smtpserver />
+  <contactthankmessage>&lt;h1&gt;Thank you&lt;/h1&gt;&lt;p&gt;The message was sent.&lt;/p&gt;</contactthankmessage>
+  <timestamppostlinks>True</timestamppostlinks>
+  <geocodinglongitude />
+  <language>en-US</language>
+  <enablereferrertracking>False</enablereferrertracking>
+  <enablecontactattachments>True</enablecontactattachments>
+  <blogrollupdateminutes>60</blogrollupdateminutes>
+  <culture>Auto</culture>
+  <sendmailoncomment>False</sendmailoncomment>
+  <enablecommentsmoderation>True</enablecommentsmoderation>
+  <enablehttpcompression>True</enablehttpcompression>
+</settings>

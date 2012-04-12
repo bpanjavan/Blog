@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DeleteAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePacket" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteAllResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileSave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePacket" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileBytes" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileSaveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileSaveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileGet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePacket" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileGetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileGetResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileBytes" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DeleteAllSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAll" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAllSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileSaveSoapIn">
+    <wsdl:part name="parameters" element="tns:FileSave" />
+  </wsdl:message>
+  <wsdl:message name="FileSaveSoapOut">
+    <wsdl:part name="parameters" element="tns:FileSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileGetSoapIn">
+    <wsdl:part name="parameters" element="tns:FileGet" />
+  </wsdl:message>
+  <wsdl:message name="FileGetSoapOut">
+    <wsdl:part name="parameters" element="tns:FileGetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FileRouterHeadSoap">
+    <wsdl:operation name="DeleteAll">
+      <wsdl:input message="tns:DeleteAllSoapIn" />
+      <wsdl:output message="tns:DeleteAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileSave">
+      <wsdl:input message="tns:FileSaveSoapIn" />
+      <wsdl:output message="tns:FileSaveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileGet">
+      <wsdl:input message="tns:FileGetSoapIn" />
+      <wsdl:output message="tns:FileGetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FileRouterHeadSoap" type="tns:FileRouterHeadSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteAll">
+      <soap:operation soapAction="http://tempuri.org/DeleteAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileSave">
+      <soap:operation soapAction="http://tempuri.org/FileSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileGet">
+      <soap:operation soapAction="http://tempuri.org/FileGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FileRouterHeadSoap12" type="tns:FileRouterHeadSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteAll">
+      <soap12:operation soapAction="http://tempuri.org/DeleteAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileSave">
+      <soap12:operation soapAction="http://tempuri.org/FileSave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileGet">
+      <soap12:operation soapAction="http://tempuri.org/FileGet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileRouterHead">
+    <wsdl:port name="FileRouterHeadSoap" binding="tns:FileRouterHeadSoap">
+      <soap:address location="http://www.bryanpanjavan.net/filerouter/filerouterhead.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FileRouterHeadSoap12" binding="tns:FileRouterHeadSoap12">
+      <soap12:address location="http://www.bryanpanjavan.net/filerouter/filerouterhead.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
